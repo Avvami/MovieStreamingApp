@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MovieStreamingApp</string>
+    <string name="logo_desc">main-logo-netflix</string>
+    <string name="movies">Фильмы</string>
+    <string name="series">Сериалы</string>
+    <string name="favourite">Мой список</string>
+</resources>
