@@ -28,7 +28,7 @@ class MoviesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_movies, container, false)
 
-        resourceRecyclerView = view.findViewById(R.id.RVLayout)
+        resourceRecyclerView = view.findViewById(R.id.RVLayout_m)
         resourceRecyclerView.layoutManager = LinearLayoutManager(context)
         resourceRecyclerView.setHasFixedSize(true)
 
