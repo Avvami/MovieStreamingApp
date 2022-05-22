@@ -1,13 +1,17 @@
 package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.moviestreamingapp.MainActivity
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.ResourceDetailActivity
 import com.bignerdranch.android.moviestreamingapp.data.Resource
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.RecyclerViewAdapter
 import com.google.firebase.database.*
@@ -50,15 +54,25 @@ class MoviesFragment : Fragment() {
                         val resource = resourceSnapshot.getValue(Resource::class.java)
                         resourceArrayList.add(resource!!)
                     }
-                    resourceRecyclerView.adapter = RecyclerViewAdapter(resourceArrayList)
+                    val itAdapter = RecyclerViewAdapter(resourceArrayList)
+                    resourceRecyclerView.adapter = itAdapter
+
+                    itAdapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+
+                            //Toast.makeText(activity, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(activity, ResourceDetailActivity::class.java)
+
+                            intent.putExtra("resource_name", resourceArrayList[position].name)
+                            activity?.startActivity(intent)
+                        }
+                    })
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                //Do nothing
             }
-
         })
     }
-
 }
