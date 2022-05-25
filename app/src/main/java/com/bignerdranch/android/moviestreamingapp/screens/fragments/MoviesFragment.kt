@@ -68,7 +68,6 @@ class MoviesFragment : Fragment() {
                     itAdapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
                         override fun onItemClick(position: Int) {
 
-                            //Toast.makeText(activity, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
                             val intent = Intent(activity, ResourceDetailActivity::class.java)
 
                             intent.putExtra("resource_age", resourceArrayListAll[position].age)
