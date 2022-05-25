@@ -3,16 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/custom_shadow.xml" value="0.179" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/favorite_toggle_selector.xml" value="0.1895" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1895" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1895" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/ic_netflix_logo_white.xml" value="0.2475" />
+        <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/my_gradient.xml" value="0.179" />
+        <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/drawable/upper_gradient.xml" value="0.179" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/activity_main.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/activity_resource_detail.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/fragment_favorite.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/fragment_movies.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/fragment_series.xml" value="0.24166666666666667" />
-        <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/resource_item.xml" value="0.4" />
+        <entry key="..\:/Users/dimav/AndroidStudioProjects/MovieStreamingApp/app/src/main/res/layout/resource_item.xml" value="0.264" />
       </map>
     </option>
   </component>

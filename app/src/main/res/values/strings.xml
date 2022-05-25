@@ -4,4 +4,14 @@
     <string name="movies">Фильмы</string>
     <string name="series">Сериалы</string>
     <string name="favourite">Мой список</string>
+    <string name="genre_text">Жанры:</string>
+    <string name="spacer">|</string>
+    <string name="common_img_desc">Image</string>
+    <string name="duration">Длительность</string>
+    <string name="list_genre">Список жанров</string>
+    <string name="description">Описание</string>
+    <string name="age">Возраст</string>
+    <string name="name">Название ресурса</string>
+    <string name="year">Год выхода</string>
+    <string name="about_text">О ресурсе:</string>
 </resources>

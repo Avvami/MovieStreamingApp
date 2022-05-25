@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.ResourceDetailActivity
 import com.bignerdranch.android.moviestreamingapp.data.Resource
+import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.RecyclerViewAdapter
 import com.google.firebase.database.*
 
@@ -20,6 +21,7 @@ class SeriesFragment : Fragment() {
     private lateinit var dbref : DatabaseReference
     private lateinit var resourceRecyclerView : RecyclerView
     private lateinit var resourceArrayList : ArrayList<Resource>
+    private lateinit var resourceArrayListAll : ArrayList<ResourceAllDetails>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class SeriesFragment : Fragment() {
         resourceRecyclerView.setHasFixedSize(true)
 
         resourceArrayList = arrayListOf<Resource>()
+        resourceArrayListAll = arrayListOf<ResourceAllDetails>()
         getResourceData()
 
         return view
@@ -51,7 +54,9 @@ class SeriesFragment : Fragment() {
                     for (resourceSnapshot in snapshot.children) {
 
                         val resource = resourceSnapshot.getValue(Resource::class.java)
+                        val resourceAll = resourceSnapshot.getValue(ResourceAllDetails::class.java)
                         resourceArrayList.add(resource!!)
+                        resourceArrayListAll.add(resourceAll!!)
                     }
                     val itAdapter = RecyclerViewAdapter(resourceArrayList)
                     resourceRecyclerView.adapter = itAdapter
@@ -62,7 +67,16 @@ class SeriesFragment : Fragment() {
                             //Toast.makeText(activity, "you clicked on item no. $position", Toast.LENGTH_SHORT).show()
                             val intent = Intent(activity, ResourceDetailActivity::class.java)
 
-                            intent.putExtra("resource_name", resourceArrayList[position].name)
+                            intent.putExtra("resource_age", resourceArrayListAll[position].age)
+                            intent.putExtra("resource_description", resourceArrayListAll[position].description)
+                            intent.putExtra("resource_duration", resourceArrayListAll[position].duration)
+                            intent.putExtra("resource_genre", resourceArrayListAll[position].genre)
+                            intent.putExtra("resource_main_poster", resourceArrayListAll[position].main_poster)
+                            intent.putExtra("resource_name", resourceArrayListAll[position].name)
+                            intent.putExtra("resource_poster", resourceArrayListAll[position].poster)
+                            intent.putExtra("resource_year", resourceArrayListAll[position].year)
+                            intent.putExtra("resource_about_text", resourceArrayListAll[position].movie)
+                            intent.putExtra("resource_about", resourceArrayListAll[position].about)
                             activity?.startActivity(intent)
                         }
                     })
