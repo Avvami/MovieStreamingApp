@@ -2,16 +2,34 @@ package com.bignerdranch.android.moviestreamingapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_resource_detail.*
 
 class ResourceDetailActivity : AppCompatActivity() {
 
+    private var aboutR : String? = null
+    private var ageR : String? = null
+    private var descR : String? = null
+    private var durR : String? = null
+    private var favR : String? = null
+    private var genreR : String? = null
+    private var posterMR : String? = null
+    private var movieR : String? = null
+    private var nameR : String? = null
+    private var posterR : String? = null
+    private var yearR : String? = null
+    private lateinit var dbMyList : DatabaseReference
+    private lateinit var dbMovies : DatabaseReference
+    private lateinit var dbSeries : DatabaseReference
     private lateinit var resourceTitle: TextView
     private lateinit var resourceYear: TextView
     private lateinit var resourceAge: TextView
@@ -40,33 +58,67 @@ class ResourceDetailActivity : AppCompatActivity() {
 
         val favoriteToggle = findViewById<ToggleButton>(R.id.favorite_toggle)
 
+        dbMyList = FirebaseDatabase.getInstance().getReference("MyList")
+        dbMovies = FirebaseDatabase.getInstance().getReference("Movies")
+        dbSeries = FirebaseDatabase.getInstance().getReference("Series")
+
+        getValues()
+        setValuesToView()
+
+        favoriteToggle.isChecked = favR == "true"
+
         favoriteToggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                Toast.makeText(this, "Is on", Toast.LENGTH_SHORT).show()
+                favR = "true"
+                val resourceData = ResourceAllDetails(aboutR, ageR, descR, durR, favR, genreR, posterMR, movieR, nameR, posterR, yearR)
+                if (movieR == "true") {
+                    dbMovies.child(nameR.toString()).child("favorite").setValue(favR)
+                } else if (movieR == "false") {
+                    dbSeries.child(nameR.toString()).child("favorite").setValue(favR)
+                }
+                dbMyList.child(nameR.toString()).setValue(resourceData)
             } else {
-                Toast.makeText(this, "Is off", Toast.LENGTH_SHORT).show()
+                favR = "false"
+                if (movieR == "true") {
+                    dbMovies.child(nameR.toString()).child("favorite").setValue(favR)
+                } else if (movieR == "false") {
+                    dbSeries.child(nameR.toString()).child("favorite").setValue(favR)
+                }
+                dbMyList.child(nameR.toString()).removeValue()
             }
         }
-
-        setValuesToView()
     }
 
     private fun setValuesToView() {
 
-        resourceTitle.text = intent.getStringExtra("resource_name")
-        resourceYear.text = intent.getStringExtra("resource_year")
-        resourceAge.text = intent.getStringExtra("resource_age")
-        resourceDuration.text = intent.getStringExtra("resource_duration")
-        resourceDescription.text = intent.getStringExtra("resource_description")
-        resourceGenre.text = intent.getStringExtra("resource_genre")
-        Picasso.get().load(intent.getStringExtra("resource_poster")).into(resourcePoster)
-        Picasso.get().load(intent.getStringExtra("resource_main_poster")).into(resourceMainPoster)
-        resourceAbout.text = intent.getStringExtra("resource_about")
+        resourceTitle.text = nameR
+        resourceYear.text = yearR
+        resourceAge.text = ageR
+        resourceDuration.text = durR
+        resourceDescription.text = descR
+        resourceGenre.text = genreR
+        Picasso.get().load(posterR).into(resourcePoster)
+        Picasso.get().load(posterMR).into(resourceMainPoster)
+        resourceAbout.text = aboutR
 
-        if (intent.getStringExtra("resource_about_text") == "false") {
+        if (movieR == "false") {
             resourceAboutText.text = "О сериале:"
         } else {
             resourceAboutText.text = "О фильме:"
         }
+    }
+
+    private fun getValues() {
+        aboutR = intent.getStringExtra("resource_about")
+        ageR = intent.getStringExtra("resource_age")
+        descR = intent.getStringExtra("resource_description")
+        durR = intent.getStringExtra("resource_duration")
+        favR = intent.getStringExtra("resource_inList")
+        genreR = intent.getStringExtra("resource_genre")
+        posterMR = intent.getStringExtra("resource_main_poster")
+        movieR = intent.getStringExtra("resource_isMovie")
+        nameR = intent.getStringExtra("resource_name")
+        posterR = intent.getStringExtra("resource_poster")
+        yearR = intent.getStringExtra("resource_year")
     }
 }

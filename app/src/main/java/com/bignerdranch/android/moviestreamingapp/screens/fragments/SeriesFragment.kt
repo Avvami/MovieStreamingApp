@@ -51,6 +51,9 @@ class SeriesFragment : Fragment() {
         dbref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+
+                    resourceArrayList.clear()
+                    resourceArrayListAll.clear()
                     for (resourceSnapshot in snapshot.children) {
 
                         val resource = resourceSnapshot.getValue(Resource::class.java)
@@ -75,8 +78,9 @@ class SeriesFragment : Fragment() {
                             intent.putExtra("resource_name", resourceArrayListAll[position].name)
                             intent.putExtra("resource_poster", resourceArrayListAll[position].poster)
                             intent.putExtra("resource_year", resourceArrayListAll[position].year)
-                            intent.putExtra("resource_about_text", resourceArrayListAll[position].movie)
+                            intent.putExtra("resource_isMovie", resourceArrayListAll[position].movie)
                             intent.putExtra("resource_about", resourceArrayListAll[position].about)
+                            intent.putExtra("resource_inList", resourceArrayListAll[position].favorite)
                             activity?.startActivity(intent)
                         }
                     })
