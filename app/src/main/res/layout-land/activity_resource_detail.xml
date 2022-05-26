@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/duration"
                 android:textColor="#A3A3A3"
                 android:textSize="16sp"
@@ -66,7 +66,7 @@
                 android:text="@string/genre_text"
                 android:textColor="#A3A3A3"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/resource_detail_poster"
                 app:layout_constraintTop_toBottomOf="@+id/resource_detail_description" />
 
             <TextView
@@ -94,7 +94,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/resource_detail_poster"
                 app:layout_constraintTop_toBottomOf="@+id/resource_detail_year" />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="14dp"
                 android:text="@string/spacer"
                 android:textColor="#A3A3A3"
                 android:textSize="20sp"
@@ -114,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/age"
                 android:textColor="#A3A3A3"
                 android:textSize="16sp"
@@ -123,40 +123,39 @@
 
             <TextView
                 android:id="@+id/resource_detail_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="45dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="center_horizontal"
                 android:text="@string/name"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/resource_detail_poster" />
+                app:layout_constraintStart_toEndOf="@+id/resource_detail_poster"
+                app:layout_constraintTop_toTopOf="@+id/view" />
 
             <TextView
                 android:id="@+id/resource_detail_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/year"
                 android:textColor="#A3A3A3"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/resource_detail_poster"
                 app:layout_constraintTop_toBottomOf="@+id/resource_detail_name" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/resource_detail_poster"
                 android:layout_width="155dp"
                 android:layout_height="220dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="35dp"
                 android:elevation="4dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/view"
                 app:shapeAppearanceOverlay="@style/RoundedSquare"
@@ -167,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="14dp"
                 android:text="@string/spacer"
                 android:textColor="#A3A3A3"
                 android:textSize="20sp"
@@ -185,7 +184,7 @@
                 android:textColor="#A3A3A3"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/resource_detail_poster"
                 app:layout_constraintTop_toBottomOf="@+id/resource_detail_genre" />
 
             <TextView
