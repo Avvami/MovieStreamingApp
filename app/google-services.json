@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "114459519620",
+    "firebase_url": "https://coursework-9ccdd-default-rtdb.firebaseio.com",
+    "project_id": "coursework-9ccdd",
+    "storage_bucket": "coursework-9ccdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114459519620:android:f857ee17d2bf760aec70d1",
+        "android_client_info": {
+          "package_name": "com.bignerdranch.android.coursework_movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114459519620-d9h25hb0buej83pnl3bomf6srken7vfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpXLLmRN2EwbkKl46YkZRSydMMqpmB67I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114459519620-d9h25hb0buej83pnl3bomf6srken7vfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114459519620:android:66867ded90144c1cec70d1",
+        "android_client_info": {
+          "package_name": "com.bignerdranch.android.moviestreamingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114459519620-d9h25hb0buej83pnl3bomf6srken7vfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpXLLmRN2EwbkKl46YkZRSydMMqpmB67I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114459519620-d9h25hb0buej83pnl3bomf6srken7vfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
