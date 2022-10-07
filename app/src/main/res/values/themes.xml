@@ -13,4 +13,29 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="LoginTextInputOuterFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:radius">6dp</item>
+        <item name="boxStrokeColor">@color/stroke_white</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom.TextInputLayout.Rounded</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="hintTextColor">@color/white_80p</item>
+        <item name="android:textColorHint">@color/white_40p</item>
+        <item name="passwordToggleTint">@color/pass_toggle</item>
+    </style>
+
+    <style name="LoginTextInputInnerFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">@color/white_80p</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Custom.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>

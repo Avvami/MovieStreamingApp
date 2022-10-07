@@ -6,6 +6,15 @@
     <string name="favourite">Мой список</string>
     <string name="genre_text">Жанры:</string>
     <string name="spacer">|</string>
+    <string name="background">background</string>
+    <string name="login">Войти</string>
+    <string name="heading1">Данные о фильмах и сериалах онлайн</string>
+    <string name="heading2">Приложение служит в информационных целях и не предназначено для стриминга</string>
+    <string name="signup">Регистрация</string>
+    <string name="first_time">Впервые тут? Зарегистрироваться.</string>
+    <string name="rights">Все права защищены (нет)</string>
+    <string name="login_hint">Электронная почта или логин</string>
+    <string name="pass_hint">Пароль</string>
     <string name="common_img_desc">Image</string>
     <string name="duration">Длительность</string>
     <string name="list_genre">Список жанров</string>
