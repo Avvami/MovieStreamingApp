@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <RelativeLayout
+        android:id="@+id/backGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -16,9 +17,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/arrowLeftImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/arrow_left"
             app:srcCompat="@drawable/left_arrow" />
 
         <TextView
@@ -26,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/arrowLeftImage"
             android:fontFamily="@font/inter_bold"
             android:text="#logo"
             android:textColor="@color/white"
@@ -84,11 +86,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button2"
+            android:id="@+id/signinBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/button_stroke"
+            android:background="@drawable/button_stroke_white"
             android:fontFamily="@font/inter_medium"
             android:text="@string/login"
             android:textAllCaps="false"
@@ -99,30 +101,34 @@
             app:layout_constraintTop_toBottomOf="@+id/passLayout" />
 
         <TextView
-            android:id="@+id/first_time"
+            android:id="@+id/firstTimeRef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="18dp"
             android:fontFamily="@font/inter_semibold"
-            android:textSize="14sp"
             android:text="@string/first_time"
             android:textColor="@color/white_90p"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintTop_toBottomOf="@+id/signinBtn" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/rightsText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="18dp"
             android:fontFamily="@font/inter_regular"
-            android:textSize="12sp"
             android:text="@string/rights"
             android:textColor="@color/white_70p"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/first_time" />
+            app:layout_constraintTop_toBottomOf="@+id/firstTimeRef" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
