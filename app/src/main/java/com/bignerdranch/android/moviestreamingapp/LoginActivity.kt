@@ -49,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
                                 startActivity(intent)
+                                overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
                             } else {
                                 Toast.makeText(
                                     this@LoginActivity,
@@ -73,6 +74,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
 
-        overridePendingTransition(R.anim.nothing_x, R.anim.slide_out_right)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }

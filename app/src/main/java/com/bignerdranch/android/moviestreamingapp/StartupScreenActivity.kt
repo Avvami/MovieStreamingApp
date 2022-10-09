@@ -12,12 +12,12 @@ class StartupScreenActivity : AppCompatActivity() {
 
         loginLink.setOnClickListener {
             startActivity(Intent(this@StartupScreenActivity, LoginActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.nothing_x)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         signupLink.setOnClickListener{
             startActivity(Intent(this@StartupScreenActivity, RegisterActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_top, R.anim.nothing_y)
+            overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_top)
         }
     }
 }

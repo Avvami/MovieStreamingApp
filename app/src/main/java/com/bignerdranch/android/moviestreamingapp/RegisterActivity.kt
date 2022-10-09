@@ -56,6 +56,7 @@ class RegisterActivity : AppCompatActivity() {
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     intent.putExtra("user_id", firebaseUser.uid)
                                     startActivity(intent)
+                                    overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
                                     finish()
                                 } else { //Not successful registration
                                     Toast.makeText(
@@ -71,13 +72,12 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         cancelImage.setOnClickListener() {
-            finish()
-            overridePendingTransition(R.anim.nothing_y, R.anim.slide_out_down)
+            onBackPressed()
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.nothing_y, R.anim.slide_out_down)
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down)
     }
 }
