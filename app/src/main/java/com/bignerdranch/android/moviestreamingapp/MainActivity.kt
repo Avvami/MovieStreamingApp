@@ -2,7 +2,6 @@ package com.bignerdranch.android.moviestreamingapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.ViewPagerAdapter
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.FavoriteFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.MoviesFragment
@@ -27,4 +26,11 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
     }
+
+    /*override fun onStart() {
+        super.onStart()
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this@MainActivity, StartupScreenActivity::class.java))
+        }
+    }*/
 }
