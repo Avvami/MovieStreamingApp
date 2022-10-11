@@ -1,14 +1,15 @@
 <resources>
     <!--Signup, login and startup screen-->
     <!--Login-->
-    <string name="login_hint">Электронная почта или логин</string>
+    <string name="login_hint">Электронная почта</string>
     <string name="pass_hint">Пароль</string>
     <string name="login">Войти</string>
     <string name="first_time">Впервые тут? Зарегистрироваться.</string>
     <!--Signup-->
     <string name="ready_questionM">Готовы начать?</string>
-    <string name="requirements">Введите адрес электронной почты или логин, а также пароль, чтобы создать аккаунт</string>
-    <string name="signup">Зарегестрироваться</string>
+    <string name="requirements">Введите адрес электронной почты, имя пользователя, а также пароль, чтобы создать аккаунт</string>
+    <string name="username_hint">Имя пользователя</string>
+    <string name="register">Зарегистрироваться</string>
     <string name="rights">Все права защищены (нет)</string>
     <!--Startup-->
     <string name="heading1">Данные о фильмах и сериалах онлайн</string>

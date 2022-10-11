@@ -4,31 +4,58 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.emailET
+import kotlinx.android.synthetic.main.activity_login.emailLayout
+import kotlinx.android.synthetic.main.activity_login.passET
+import kotlinx.android.synthetic.main.activity_login.passLayout
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        emailET.addTextChangedListener() {
+            if (Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
+                emailLayout.error = null
+            }
+        }
+
+        emailET.setOnFocusChangeListener {_, hasFocus ->
+            if (!hasFocus) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
+                    emailLayout.error = "Некорректный адрес электронной почты"
+                }
+            }
+        }
+
+        passET.addTextChangedListener() {
+            if (passET.text.toString().length >= 4) {
+                passLayout.error = null
+            }
+        }
+
         signinBtn.setOnClickListener() {
             when {
+
                 TextUtils.isEmpty(emailET.text.toString().trim {it <= ' '}) -> {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Пожалуйста, введите адрес электронной почты или логин.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    emailLayout.error = "Пожалуйста, введите адрес электронной почты"
+                    emailET.requestFocus()
+                }
+
+                !Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches() -> {
+                    emailLayout.error = "Некорректный адрес электронной почты"
+                    emailET.requestFocus()
                 }
 
                 TextUtils.isEmpty(passET.text.toString().trim {it <= ' '}) -> {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Пожалуйства введите пароль.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    passLayout.error = "Пожалуйста, введите пароль"
+                    passET.requestFocus()
                 }
                 else -> {
 
@@ -39,22 +66,24 @@ class LoginActivity : AppCompatActivity() {
                         .addOnCompleteListener() { task ->
 
                             if (task.isSuccessful) {
-                                Toast.makeText(
+                                StyleableToast.makeText(
                                     this@LoginActivity,
                                     "Авторизация успешна.",
-                                    Toast.LENGTH_SHORT
+                                    Toast.LENGTH_SHORT,
+                                    R.style.customToast
                                 ).show()
 
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                intent.putExtra("user_id", FirebaseAuth.getInstance().currentUser!!.uid)
                                 startActivity(intent)
                                 overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
+                                finish()
                             } else {
-                                Toast.makeText(
+                                StyleableToast.makeText(
                                     this@LoginActivity,
                                     task.exception!!.message.toString(),
-                                    Toast.LENGTH_SHORT
+                                    Toast.LENGTH_SHORT,
+                                    R.style.customToast
                                 ).show()
                             }
                         }

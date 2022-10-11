@@ -19,6 +19,7 @@
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom.TextInputLayout.Rounded</item>
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="hintTextColor">@color/white_80p</item>
+        <item name="errorIconDrawable">@null</item>
         <item name="android:textColorHint">@color/white_40p</item>
         <item name="passwordToggleTint">@color/pass_toggle_white</item>
     </style>
@@ -32,16 +33,17 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="SignupTextInputOuterFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="RegisterTextInputOuterFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/stroke_black</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Custom.TextInputLayout.Rounded</item>
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="hintTextColor">@color/blue</item>
+        <item name="errorIconDrawable">@null</item>
         <item name="android:textColorHint">@color/black_30p</item>
         <item name="passwordToggleTint">@color/pass_toggle_black</item>
     </style>
 
-    <style name="SignupTextInputInnerFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="RegisterTextInputInnerFieldStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColor">@color/black_55p</item>
         <item name="android:maxLines">1</item>
         <item name="android:textSize">16sp</item>
@@ -53,6 +55,12 @@
     <style name="ShapeAppearanceOverlay.Custom.TextInputLayout.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
+    </style>
+    
+    <style name="customToast">
+        <item name="stFont">@font/inter_medium</item>
+        <item name="stIconStart">@drawable/temp_icon</item>
+        <item name="stRadius">6dp</item>
     </style>
 
 </resources>

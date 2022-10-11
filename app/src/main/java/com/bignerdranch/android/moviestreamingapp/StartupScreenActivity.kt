@@ -15,7 +15,7 @@ class StartupScreenActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        signupLink.setOnClickListener{
+        registerLink.setOnClickListener{
             startActivity(Intent(this@StartupScreenActivity, RegisterActivity::class.java))
             overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_top)
         }

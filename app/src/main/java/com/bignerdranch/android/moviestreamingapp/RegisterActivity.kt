@@ -4,37 +4,63 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
+import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_signup.*
+import io.github.muddz.styleabletoast.StyleableToast
+import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.emailET
+import kotlinx.android.synthetic.main.activity_register.passET
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        setContentView(R.layout.activity_register)
 
-        signupBtn.setOnClickListener() {
+        emailET.addTextChangedListener() {
+            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && passET.text.toString().trim {it <= ' '}.length >= 4
+
+            if (Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
+                emailLayout.error = null
+            }
+        }
+
+        emailET.setOnFocusChangeListener {_, hasFocus ->
+            if (!hasFocus) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
+                    emailLayout.error = "Некорректный адрес электронной почты"
+                }
+            }
+        }
+
+        usernameET.addTextChangedListener() {
+            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && passET.text.toString().trim {it <= ' '}.length >= 4
+        }
+
+        passET.addTextChangedListener() {
+            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && passET.text.toString().trim {it <= ' '}.length >= 4
+        }
+
+        registerBtn.setOnClickListener() {
+
             when {
-                TextUtils.isEmpty(emailET.text.toString().trim {it <= ' '}) -> {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Пожалуйста, введите адрес электронной почты или логин.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                !Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches() -> {
+                    emailLayout.error = "Некорректный адрес электронной почты"
+                    emailET.requestFocus()
                 }
 
-                TextUtils.isEmpty(passET.text.toString().trim {it <= ' '}) -> {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Пожалуйства введите пароль.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
                 else -> {
                     val email: String = emailET.text.toString().trim {it <= ' '}
+                    val username: String = usernameET.text.toString().trim {it <= ' '}
                     val password: String = passET.text.toString().trim {it <= ' '}
 
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -46,23 +72,24 @@ class RegisterActivity : AppCompatActivity() {
                                     //Firebase registered user
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
 
-                                    Toast.makeText(
+                                    StyleableToast.makeText(
                                         this@RegisterActivity,
                                         "Аккаунт успешно создан",
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
+                                        R.style.customToast
                                     ).show()
 
                                     val intent = Intent(this@RegisterActivity, MainActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    intent.putExtra("user_id", firebaseUser.uid)
                                     startActivity(intent)
                                     overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
                                     finish()
-                                } else { //Not successful registration
-                                    Toast.makeText(
+                                } else { //Not successful registered
+                                    StyleableToast.makeText(
                                         this@RegisterActivity,
                                         task.exception!!.message.toString(),
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
+                                        R.style.customToast
                                     ).show()
                                 }
                             }
