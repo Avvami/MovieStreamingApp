@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="14dp"
-            android:contentDescription="@string/cancel"
+            android:contentDescription="@string/icon_description"
             android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

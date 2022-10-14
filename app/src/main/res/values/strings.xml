@@ -16,10 +16,24 @@
     <string name="heading2">Приложение служит в информационных целях и не предназначено для стриминга</string>
     <string name="get_started">Регистрация</string>
 
+    <!--MainActivity-->
+    <string name="play_btn">Смотреть</string>
+    <string name="more_text">Подробнее</string>
+
+    <string name="profile_n_more">Профиль &amp; Прочее</string>
+    <string name="profile_username">Имя пользователя</string>
+    <string name="profile_edit">Редактировать профиль</string>
+    <string name="notification">Уведомления</string>
+    <string name="my_list">Мой список</string>
+    <string name="account">Настройки аккаунта</string>
+    <string name="about_app">О приложении</string>
+    <string name="sign_out">Выйти</string>
+
+    <string name="notifications_settings">Никаких уведомлений у приложения нет.</string>
+
     <string name="app_name">MovieStreamingApp</string>
     <string name="movies">Фильмы</string>
     <string name="series">Сериалы</string>
-    <string name="favourite">Мой список</string>
     <string name="genre_text">Жанры:</string>
     <string name="spacer">|</string>
     <string name="common_img_desc">Image</string>
@@ -32,8 +46,9 @@
     <string name="about_text">О ресурсе:</string>
 
     <!--Images description-->
+    <string name="nested_scroll">nested_scroll_view</string>
+    <string name="preview_image">preview_image</string>
     <string name="background">startup_background</string>
+    <string name="icon_description">common_icon_description</string>
     <string name="logo_desc">main-logo-netflix</string>
-    <string name="arrow_left">arrow_left</string>
-    <string name="cancel">cancel</string>
 </resources>

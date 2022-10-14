@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        backGroup.setOnClickListener() {
+        loginGroupBack.setOnClickListener() {
             onBackPressed()
         }
     }

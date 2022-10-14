@@ -8,19 +8,19 @@
     tools:context=".LoginActivity">
 
     <RelativeLayout
-        android:id="@+id/backGroup"
+        android:id="@+id/loginGroupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/arrowLeftImage"
+            android:id="@+id/arrowLeftImageLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/arrow_left"
+            android:contentDescription="@string/icon_description"
             app:srcCompat="@drawable/left_arrow" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_toEndOf="@+id/arrowLeftImage"
+            android:layout_toEndOf="@+id/arrowLeftImageLogin"
             android:fontFamily="@font/inter_bold"
             android:text="#logo"
             android:textColor="@color/white"
