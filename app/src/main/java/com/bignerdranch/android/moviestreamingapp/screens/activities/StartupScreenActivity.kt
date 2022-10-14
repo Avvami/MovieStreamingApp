@@ -1,8 +1,9 @@
-package com.bignerdranch.android.moviestreamingapp
+package com.bignerdranch.android.moviestreamingapp.screens.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bignerdranch.android.moviestreamingapp.R
 import kotlinx.android.synthetic.main.activity_startup_screen.*
 
 class StartupScreenActivity : AppCompatActivity() {

@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bignerdranch.android.moviestreamingapp.MainActivity
 import com.bignerdranch.android.moviestreamingapp.R
-import com.bignerdranch.android.moviestreamingapp.ResourceDetailActivity
+import com.bignerdranch.android.moviestreamingapp.screens.activities.ResourceDetailActivity
 import com.bignerdranch.android.moviestreamingapp.data.Resource
 import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.RecyclerViewAdapter

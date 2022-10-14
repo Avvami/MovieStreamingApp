@@ -1,43 +1,62 @@
 package com.bignerdranch.android.moviestreamingapp
 
-import android.animation.ObjectAnimator
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.TransitionDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.bignerdranch.android.moviestreamingapp.screens.adapters.ViewPagerAdapter
-import com.bignerdranch.android.moviestreamingapp.screens.fragments.FavoriteFragment
-import com.bignerdranch.android.moviestreamingapp.screens.fragments.MoviesFragment
-import com.bignerdranch.android.moviestreamingapp.screens.fragments.SeriesFragment
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.squareup.picasso.Picasso
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.bignerdranch.android.moviestreamingapp.screens.fragments.HomeFragment
+import com.bignerdranch.android.moviestreamingapp.screens.fragments.MoreFragment
+import com.bignerdranch.android.moviestreamingapp.screens.fragments.SearchFragment
+import com.bignerdranch.android.moviestreamingapp.screens.fragments.SoonFragment
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var dbref : DatabaseReference
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var soonFragment: SoonFragment
+    private lateinit var searchFragment: SearchFragment
+    private lateinit var moreFragment: MoreFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dbref = FirebaseDatabase.getInstance().reference
-        dbref.child("sample").child("img").get().addOnSuccessListener {
-            val imageRef = it.child("image").value.toString()
-            Log.i("Link", imageRef)
-            Picasso.get().load(imageRef).into(previewImage)
-        }
+        homeFragment = HomeFragment()
+        soonFragment = SoonFragment()
+        searchFragment = SearchFragment()
+        moreFragment = MoreFragment()
 
-        avatarImage.setOnClickListener() {
-            startActivity(Intent(this@MainActivity, ProfileNMoreActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        replaceFragment(homeFragment)
+
+        bottomNavigationView?.setOnItemSelectedListener() {
+
+            when (it.itemId) {
+                R.id.home -> replaceFragment(homeFragment)
+                R.id.soon -> replaceFragment(soonFragment)
+                R.id.search -> replaceFragment(searchFragment)
+                R.id.more -> replaceFragment(moreFragment)
+
+                else -> {
+                    StyleableToast.makeText(
+                    this@MainActivity,
+                    "Что-то пошло не так",
+                    Toast.LENGTH_SHORT,
+                    R.style.customToast
+                ).show()}
+            }
+            true
         }
 
         //setUpTabs()
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameLayout, fragment)
+        fragmentTransaction.commit()
     }
 
     /*private fun setUpTabs() {

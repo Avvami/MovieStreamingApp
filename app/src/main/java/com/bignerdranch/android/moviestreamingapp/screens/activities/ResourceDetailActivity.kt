@@ -1,18 +1,16 @@
-package com.bignerdranch.android.moviestreamingapp
+package com.bignerdranch.android.moviestreamingapp.screens.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import android.widget.ToggleButton
+import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_resource_detail.*
 
 class ResourceDetailActivity : AppCompatActivity() {
 

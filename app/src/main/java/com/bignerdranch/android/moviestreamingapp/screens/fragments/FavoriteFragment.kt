@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
-import com.bignerdranch.android.moviestreamingapp.ResourceDetailActivity
+import com.bignerdranch.android.moviestreamingapp.screens.activities.ResourceDetailActivity
 import com.bignerdranch.android.moviestreamingapp.data.Resource
 import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.RecyclerViewAdapter

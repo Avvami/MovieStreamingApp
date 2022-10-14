@@ -17,6 +17,11 @@
     <string name="get_started">Регистрация</string>
 
     <!--MainActivity-->
+    <string name="home">Главная</string>
+    <string name="soon">Скоро</string>
+    <string name="search">Поиск</string>
+    <string name="more">Прочее</string>
+
     <string name="play_btn">Смотреть</string>
     <string name="more_text">Подробнее</string>
 
