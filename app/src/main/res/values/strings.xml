@@ -36,6 +36,17 @@
 
     <string name="notifications_settings">Никаких уведомлений у приложения нет.</string>
 
+    <string name="about_app_text">Приложение создано в рамках курсового проекта образовательной деятельности студента.</string>
+
+    <string name="email_address">Адрес электронной почты</string>
+    <string name="email_text">email@example.com</string>
+    <string name="password_text">Сменить пароль</string>
+    <string name="delete_account">Удалить аккаунт</string>
+    
+    <string name="profile_edit_text">Редактирование профиля</string>
+    <string name="apply">Применить</string>
+    <string name="usernameET">Имя пользователя</string>
+
     <string name="app_name">MovieStreamingApp</string>
     <string name="movies">Фильмы</string>
     <string name="series">Сериалы</string>

@@ -8,7 +8,7 @@
     tools:context=".screens.activities.ProfileNMoreActivity">
 
     <RelativeLayout
-        android:id="@+id/notificationsGroupBack"
+        android:id="@+id/profileNMoreGroupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -24,7 +24,7 @@
             app:srcCompat="@drawable/icon_left_arrow" />
 
         <TextView
-            android:id="@+id/notifications"
+            android:id="@+id/profileNMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -45,7 +45,7 @@
         android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationsGroupBack"
+        app:layout_constraintTop_toBottomOf="@+id/profileNMoreGroupBack"
         app:shapeAppearanceOverlay="@style/roundAvatarOutline"
         app:srcCompat="@drawable/profile_icon"
         app:strokeColor="@color/white"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="8dp"
-            android:layout_toStartOf="@id/rightArrowImg1"
+            android:layout_toStartOf="@id/rANotification"
             android:layout_toEndOf="@id/bellImage"
             android:fontFamily="@font/inter_bold"
             android:text="@string/notification"
@@ -138,7 +138,7 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/rightArrowImg1"
+            android:id="@+id/rANotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -180,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginStart="8dp"
-            android:layout_toStartOf="@id/rANotification"
+            android:layout_toStartOf="@id/rAMyList"
             android:layout_toEndOf="@id/myListImage"
             android:fontFamily="@font/inter_bold"
             android:text="@string/my_list"
@@ -188,7 +188,7 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/rANotification"
+            android:id="@+id/rAMyList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -276,7 +276,7 @@
             app:tint="@color/white_90p" />
 
         <TextView
-            android:id="@+id/helpTV"
+            android:id="@+id/aboutTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

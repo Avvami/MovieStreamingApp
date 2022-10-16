@@ -12,7 +12,7 @@ class ProfileNMoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_nmore)
 
-        notificationsGroupBack.setOnClickListener() {
+        profileNMoreGroupBack.setOnClickListener() {
             onBackPressed()
         }
 
@@ -24,8 +24,28 @@ class ProfileNMoreActivity : AppCompatActivity() {
             finish()
         }
 
+        editProfileGroup.setOnClickListener() {
+            startActivity(Intent(this@ProfileNMoreActivity, ProfileEditActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
         notificationGroup.setOnClickListener() {
-            startActivity(Intent(this@ProfileNMoreActivity, Notifications::class.java))
+            startActivity(Intent(this@ProfileNMoreActivity, NotificationsActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        myListGroup.setOnClickListener() {
+            startActivity(Intent(this@ProfileNMoreActivity, MyListActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        accountGroup.setOnClickListener() {
+            startActivity(Intent(this@ProfileNMoreActivity, AccountSettingActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        aboutGroup.setOnClickListener() {
+            startActivity(Intent(this@ProfileNMoreActivity, AboutAppActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }

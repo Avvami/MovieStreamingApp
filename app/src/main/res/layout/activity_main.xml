@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:contentDescription="@string/nested_scroll"
-    tools:context=".MainActivity">
+    tools:context=".screens.activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"

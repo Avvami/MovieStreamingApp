@@ -7,7 +7,6 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import com.bignerdranch.android.moviestreamingapp.MainActivity
 import com.bignerdranch.android.moviestreamingapp.R
 import com.google.firebase.auth.FirebaseAuth
 import io.github.muddz.styleabletoast.StyleableToast

@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.bignerdranch.android.moviestreamingapp.R
 import kotlinx.android.synthetic.main.activity_notifications.*
 
-class Notifications : AppCompatActivity() {
+class NotificationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notifications)

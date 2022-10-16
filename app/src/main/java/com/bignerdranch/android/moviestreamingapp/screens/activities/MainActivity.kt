@@ -1,9 +1,10 @@
-package com.bignerdranch.android.moviestreamingapp
+package com.bignerdranch.android.moviestreamingapp.screens.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.HomeFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.MoreFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.SearchFragment
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity,
                     "Что-то пошло не так",
                     Toast.LENGTH_SHORT,
-                    R.style.customToast
+                        R.style.customToast
                 ).show()}
             }
             true

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import com.bignerdranch.android.moviestreamingapp.MainActivity
 import com.bignerdranch.android.moviestreamingapp.R
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
