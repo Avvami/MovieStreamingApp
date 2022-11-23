@@ -3,5 +3,14 @@
     <translate
         android:fromYDelta="0"
         android:toYDelta="-25%p"
-        android:duration="@android:integer/config_shortAnimTime"/>
+        android:duration="300"/>
+
+    <scale
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:pivotX="50%p"
+        android:pivotY="50%p"
+        android:toXScale="0.9"
+        android:toYScale="0.9"
+        android:duration="300"/>
 </set>

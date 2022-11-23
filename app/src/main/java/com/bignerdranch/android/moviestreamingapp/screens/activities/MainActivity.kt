@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity,
                     "Что-то пошло не так",
                     Toast.LENGTH_SHORT,
-                        R.style.customToast
+                        R.style.CustomToastStyle
                 ).show()}
             }
             true

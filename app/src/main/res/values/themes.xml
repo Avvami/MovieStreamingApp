@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.MovieStreamingApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/pale_black</item>
-        <item name="colorPrimaryVariant">@color/dark_grey</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/pale_black</item>
-        <item name="colorSecondaryVariant">@color/dark_grey</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -57,23 +57,18 @@
         <item name="cornerSize">8dp</item>
     </style>
     
-    <style name="customToast">
+    <style name="CustomToastStyle">
         <item name="stFont">@font/inter_medium</item>
         <item name="stIconStart">@drawable/temp_icon</item>
         <item name="stRadius">6dp</item>
     </style>
     
-    <style name="roundAvatar">
+    <style name="Round8dpStyle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="roundAvatarOutline">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">10dp</item>
-    </style>
-
-    <style name="roundAvatarShadow">
+    <style name="Round10dpStyle">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
     </style>

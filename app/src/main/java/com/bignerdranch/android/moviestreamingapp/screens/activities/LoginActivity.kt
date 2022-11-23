@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                                     this@LoginActivity,
                                     "Авторизация успешна.",
                                     Toast.LENGTH_SHORT,
-                                    R.style.customToast
+                                    R.style.CustomToastStyle
                                 ).show()
 
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                                     this@LoginActivity,
                                     task.exception!!.message.toString(),
                                     Toast.LENGTH_SHORT,
-                                    R.style.customToast
+                                    R.style.CustomToastStyle
                                 ).show()
                             }
                         }
@@ -104,6 +104,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
 
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right)
     }
 }

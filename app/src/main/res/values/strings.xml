@@ -42,10 +42,24 @@
     <string name="email_text">email@example.com</string>
     <string name="password_text">Сменить пароль</string>
     <string name="delete_account">Удалить аккаунт</string>
-    
+
     <string name="profile_edit_text">Редактирование профиля</string>
     <string name="apply">Применить</string>
     <string name="usernameET">Имя пользователя</string>
+
+    <string name="resource_name">Название ресурса</string>
+    <string name="resource_release_year">Год</string>
+    <string name="resource_age">Возраст</string>
+    <string name="resource_duration">Длительность</string>
+    <string name="resource_trailer">Трейлер</string>
+    <string name="resource_description">Описание</string>
+    <string name="resource_cast">В ролях:</string>
+    <string name="resource_cast_tv">Роли</string>
+    <string name="resource_genres">Жанры:</string>
+    <string name="resource_genres_tv">Жанры</string>
+    <string name="resource_about">О ресурсе:</string>
+    <string name="resource_about_tv">О ресурсе</string>
+    <string name="resource_available">Доступно для просмотра:</string>
 
     <string name="app_name">MovieStreamingApp</string>
     <string name="movies">Фильмы</string>
@@ -63,8 +77,10 @@
 
     <!--Images description-->
     <string name="nested_scroll">nested_scroll_view</string>
-    <string name="preview_image">preview_image</string>
+    <string name="image_description">common_image_description</string>
     <string name="background">startup_background</string>
     <string name="icon_description">common_icon_description</string>
     <string name="logo_desc">main-logo-netflix</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 
 class ResourceDetailActivity : AppCompatActivity() {
 
-    private var aboutR : String? = null
+    /*private var aboutR : String? = null
     private var ageR : String? = null
     private var descR : String? = null
     private var durR : String? = null
@@ -118,5 +118,5 @@ class ResourceDetailActivity : AppCompatActivity() {
         nameR = intent.getStringExtra("resource_name")
         posterR = intent.getStringExtra("resource_poster")
         yearR = intent.getStringExtra("resource_year")
-    }
+    }*/
 }

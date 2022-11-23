@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileNMoreGroupBack"
-        app:shapeAppearanceOverlay="@style/roundAvatarOutline"
+        app:shapeAppearanceOverlay="@style/Round10dpStyle"
         app:srcCompat="@drawable/profile_icon"
         app:strokeColor="@color/white"
         app:strokeWidth="3dp" />

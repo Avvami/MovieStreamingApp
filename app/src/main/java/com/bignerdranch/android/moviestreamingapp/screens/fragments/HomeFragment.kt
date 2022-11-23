@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         binding.avatarImage.setOnClickListener() {
             val intent = Intent(activity, ProfileNMoreActivity::class.java)
             activity?.startActivity(intent)
-            activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         return binding.root

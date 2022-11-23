@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
                                         this@RegisterActivity,
                                         "Аккаунт успешно создан",
                                         Toast.LENGTH_SHORT,
-                                        R.style.customToast
+                                        R.style.CustomToastStyle
                                     ).show()
 
                                     val intent = Intent(this@RegisterActivity, MainActivity::class.java)
@@ -88,7 +88,7 @@ class RegisterActivity : AppCompatActivity() {
                                         this@RegisterActivity,
                                         task.exception!!.message.toString(),
                                         Toast.LENGTH_SHORT,
-                                        R.style.customToast
+                                        R.style.CustomToastStyle
                                     ).show()
                                 }
                             }

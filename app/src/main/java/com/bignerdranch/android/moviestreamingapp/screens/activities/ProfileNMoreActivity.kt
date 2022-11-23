@@ -26,33 +26,33 @@ class ProfileNMoreActivity : AppCompatActivity() {
 
         editProfileGroup.setOnClickListener() {
             startActivity(Intent(this@ProfileNMoreActivity, ProfileEditActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         notificationGroup.setOnClickListener() {
             startActivity(Intent(this@ProfileNMoreActivity, NotificationsActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         myListGroup.setOnClickListener() {
             startActivity(Intent(this@ProfileNMoreActivity, MyListActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         accountGroup.setOnClickListener() {
             startActivity(Intent(this@ProfileNMoreActivity, AccountSettingActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         aboutGroup.setOnClickListener() {
             startActivity(Intent(this@ProfileNMoreActivity, AboutAppActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
 
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right)
     }
 }
