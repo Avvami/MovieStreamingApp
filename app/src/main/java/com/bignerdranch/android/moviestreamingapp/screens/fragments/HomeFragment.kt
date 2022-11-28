@@ -14,7 +14,6 @@ import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.databinding.FragmentHomeBinding
 import com.bignerdranch.android.moviestreamingapp.model.AllCategory
 import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
-import com.bignerdranch.android.moviestreamingapp.screens.activities.MainActivity
 import com.bignerdranch.android.moviestreamingapp.screens.activities.ProfileNMoreActivity
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.MainRecyclerAdapter
 import com.bumptech.glide.Glide
@@ -32,117 +31,144 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         dbRef = FirebaseDatabase.getInstance().reference
 
-        val currentUser = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
-        currentUser.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val imgRef = snapshot.child("profile_image").value.toString()
-                    if (imgRef.isEmpty()) {
-                        //Do nothing
+        getDataFromFirebase(object : Callback {
+            override fun onCallBack(previewTitle: String, previewUrl: String, userFavourite: String) {
+
+                binding.moreGroup.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("title", previewTitle)
+                    bundle.putString("preview_image", previewUrl)
+                    val fragment = DetailsFragment()
+                    fragment.arguments = bundle
+                    fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                }
+
+                binding.previewImage.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("title", previewTitle)
+                    bundle.putString("preview_image", previewUrl)
+                    val fragment = DetailsFragment()
+                    fragment.arguments = bundle
+                    fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                }
+
+                //String to mutableList
+                var userFavouriteTemp = userFavourite
+                val previewIsChecked: Boolean
+                if (userFavouriteTemp.endsWith(";"))
+                    userFavouriteTemp = userFavouriteTemp.substring(0, userFavouriteTemp.length - 1)
+                val userFavouriteList = userFavouriteTemp.split(";").map {  it.trim() }.toMutableList()
+
+                //Check if banner exists
+                previewIsChecked = if (userFavouriteList.contains(previewTitle)) {
+                    binding.myListImage.setImageResource(R.drawable.icon_approve)
+                    true
+                } else {
+                    binding.myListImage.setImageResource(R.drawable.icon_plus)
+                    false
+                }
+
+                binding.myListGroup.setOnClickListener {
+                    val dbUserRef = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
+                    val updatedUserFavorite: String
+
+                    if (previewIsChecked) {
+                        userFavouriteList.remove(previewTitle)
+                        updatedUserFavorite = userFavouriteList.joinToString(";")
+                        dbUserRef.child("my_list").setValue(updatedUserFavorite)
+
+                        context?.let { it1 -> StyleableToast.makeText(it1, "Удалено из моего списка", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show() }
                     } else {
-                        Glide.with(this@HomeFragment).load(imgRef).into(binding.profileImage)
+                        userFavouriteList.add(previewTitle)
+                        updatedUserFavorite = userFavouriteList.joinToString(";")
+                        dbUserRef.child("my_list").setValue(updatedUserFavorite)
+
+                        context?.let { it1 -> StyleableToast.makeText(it1, "Добавлено в мой список", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show() }
                     }
                 }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                //Do nothing
-            }
-
         })
 
-        val dbDBRef = dbRef.child("DB")
-        val dbCategoriesRef = dbRef.child("Categories")
-        var preview = ""
-        val homePreview = dbRef.child("Preview")
-
-        homePreview.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    preview = snapshot.child("Home").value.toString()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("TAG", error.message)
-            }
-
-        })
-
-        val allCategory: MutableList<AllCategory> = ArrayList()
-        dbCategoriesRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //if (snapshot.exists()) {
-                    snapshot.children.forEach { foreach ->
-                        val categoryTitle = foreach.key.toString()
-                        val categoryItem = foreach.value.toString()
-                        val itemList: List<String> = categoryItem.split(";").map { its -> its.trim() }
-                        val categoryItemList: MutableList<CategoryItem> = ArrayList()
-                        itemList.forEach { value ->
-                            val title = dbDBRef.child(value).key
-                            dbDBRef.child(value).child("poster_min").get().addOnSuccessListener { get ->
-                                //binding.textView3.text = "${title}"
-                                categoryItemList.add(CategoryItem("$title", "${get.value}"))
-                            }
-                        }
-                        categoryItemList.forEach{
-                            binding.textView3.text = it.imageUrl
-                        }
-                        allCategory.add(AllCategory(categoryTitle, categoryItemList))
-                        setMainCategoryRecycler(allCategory)
-                    }
-                //}
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("TAG", error.message)
-            }
-
-        })
-        /*dbCategoriesRef.get().addOnSuccessListener {
-            val category = it.children.toString()
-            val categoryItem = it.value.toString()
-            binding.textView3.text = category
-            val categoryItemList: MutableList<CategoryItem> = ArrayList()
-        }*/
-        dbRef.child("DB").get().addOnSuccessListener {
-
-            val imgRef = it.child(preview).child("poster").value.toString()
-            Glide.with(this@HomeFragment).load(imgRef).into(binding.previewImage)
-        }
-
-        val categoryItemList1: MutableList<CategoryItem> = ArrayList()
-        categoryItemList1.add(CategoryItem("Some1", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/movies-small%2Fawake.jpg?alt=media&token=cd2e66e3-cc3f-4dd6-8345-1d33ed3dd677"))
-        categoryItemList1.add(CategoryItem("Some2", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/movies-small%2Fdevil%20all%20the%20time.jpg?alt=media&token=5959614e-8024-4ec7-b688-c870f59daf14"))
-        categoryItemList1.add(CategoryItem("Some3", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/movies-small%2Fgreen%20book.jpg?alt=media&token=c254c222-7581-44ee-a944-3c56986563bb"))
-        categoryItemList1.add(CategoryItem("Some4", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/movies-small%2Fin%20the%20shadow%20of%20the%20moon.jpg?alt=media&token=7a617600-099c-4d68-9540-3b21025e2b0d"))
-        categoryItemList1.add(CategoryItem("Some5", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/movies-small%2Fonce%20upon%20a%20time%20in%20hollywood.jpg?alt=media&token=d95bfa70-8ced-4703-93a7-068afcc59e6d"))
-
-        val categoryItemList2: MutableList<CategoryItem> = ArrayList()
-        categoryItemList2.add(CategoryItem("Some6", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/series-small%2Falice%20in%20borderlands.jpg?alt=media&token=c21cdc24-3af9-4736-a0b0-515ca3d9775b"))
-        categoryItemList2.add(CategoryItem("Some7", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/series-small%2Fgame%20of%20thrones.jpg?alt=media&token=6a692c4b-3d02-4a24-8a66-f6f1c0f7d0ad"))
-        categoryItemList2.add(CategoryItem("Some8", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/series-small%2Fhow%20to%20sell%20drugs%20online.jpg?alt=media&token=e3d4de81-c26e-43a2-abff-8a3f03055efa"))
-        categoryItemList2.add(CategoryItem("Some9", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/series-small%2Fbojack%20horseman.jpg?alt=media&token=0c762645-fde1-47a0-98bc-2edddf4be0a4"))
-        categoryItemList2.add(CategoryItem("Some10", "https://firebasestorage.googleapis.com/v0/b/coursework-9ccdd.appspot.com/o/series-small%2Flupin.jpg?alt=media&token=1359ec17-9a8e-4951-8814-2670953a9f0f"))
-
-        val allCategory2: MutableList<AllCategory> = ArrayList()
-        allCategory2.add(AllCategory("Socks in Sandals", categoryItemList1))
-        allCategory2.add(AllCategory("Crap and Paradise", categoryItemList2))
-        setMainCategoryRecycler(allCategory2)
-
-        binding.profileImage.setOnClickListener() {
+        binding.profileImage.setOnClickListener {
             val intent = Intent(activity, ProfileNMoreActivity::class.java)
             activity?.startActivity(intent)
             activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
         return binding.root
+    }
+
+    interface Callback {
+        fun onCallBack(previewTitle: String, previewUrl: String, userFavourite: String)
+    }
+
+    private fun getDataFromFirebase (finalCallback: Callback) {
+
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val allCategory: MutableList<AllCategory> = ArrayList()
+
+                if (snapshot.exists()) {
+                    val dbDBRef = snapshot.child("DB")
+                    val dbCategoriesRef = snapshot.child("Categories")
+                    val homePreview = snapshot.child("Preview")
+                    val currentUserRef = snapshot.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
+
+                    //Preview banner
+                    val previewTitle: String = homePreview.child("Home").value.toString()
+                    val previewUrl: String = dbDBRef.child(previewTitle).child("poster_min").value.toString()
+                    val previewLargeUrl = dbDBRef.child(previewTitle).child("poster").value.toString()
+                    Glide.with(this@HomeFragment).load(previewLargeUrl).into(binding.previewImage)
+
+                    //User
+                    val profileImageRef = currentUserRef.child("profile_image")
+                    val myListRef = currentUserRef.child("my_list")
+
+                    if (profileImageRef.exists()) {
+                        Glide.with(this@HomeFragment).load(profileImageRef.value).into(binding.profileImage)
+                    } else {
+                        //No profile image
+                    }
+
+                    val userFavourite: String = if (myListRef.exists()) {
+                        myListRef.value.toString()
+                    } else {
+                        ""
+                    }
+
+                    //For nested recycler view
+                    dbCategoriesRef.children.forEach { foreach ->
+                        val categoryTitle = foreach.key.toString()
+                        var categoryItem = foreach.value.toString()
+                        if (categoryItem.endsWith(";"))
+                            categoryItem = categoryItem.substring(0, categoryItem.length - 1)
+                        val itemList: List<String> = categoryItem.split(";").map { its -> its.trim() }
+                        val categoryItemList: MutableList<CategoryItem> = ArrayList()
+
+                        itemList.forEach { value ->
+                            val title = dbDBRef.child(value).key.toString()
+                            val imageUrl = dbDBRef.child(value).child("poster_min").value.toString()
+                            categoryItemList.add(CategoryItem(title, imageUrl))
+                        }
+                        allCategory.add(AllCategory(categoryTitle, categoryItemList))
+                        setMainCategoryRecycler(allCategory)
+                    }
+
+                    finalCallback.onCallBack(previewTitle, previewUrl, userFavourite)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("TAG", error.message)
+            }
+
+        })
     }
 
     private fun setMainCategoryRecycler (allCategory: List<AllCategory>) {

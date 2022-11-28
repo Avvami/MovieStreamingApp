@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".screens.activities.ResourceDetailActivity">
+    tools:context=".screens.fragments.DetailsFragment">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -35,6 +35,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <View
+                android:id="@+id/gradient_bottom2"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:background="@drawable/gradient_bottom"
+                app:layout_constraintBottom_toBottomOf="@+id/posterBlurImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/posterImage"
@@ -233,8 +242,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="18dp"
-                android:text="@string/resource_cast_tv"
                 android:fontFamily="@font/inter_regular"
+                android:text="@string/resource_cast_tv"
                 android:textColor="@color/white_70p"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cast"
@@ -246,11 +255,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/resource_genres"
                 android:fontFamily="@font/inter_semibold"
+                android:text="@string/resource_genres"
                 android:textColor="@color/white_70p"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cast" />
+                app:layout_constraintTop_toBottomOf="@+id/castTV" />
 
             <TextView
                 android:id="@+id/genresTV"
@@ -258,8 +267,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="18dp"
-                android:text="@string/resource_genres_tv"
                 android:fontFamily="@font/inter_regular"
+                android:text="@string/resource_genres_tv"
                 android:textColor="@color/white_70p"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/genres"
@@ -270,12 +279,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/resource_about"
+                android:layout_marginTop="13dp"
                 android:fontFamily="@font/inter_semibold"
+                android:text="@string/resource_about"
                 android:textColor="@color/white_70p"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genres" />
+                app:layout_constraintTop_toBottomOf="@+id/genresTV" />
 
             <TextView
                 android:id="@+id/aboutTV"
@@ -283,8 +292,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="18dp"
-                android:text="@string/resource_about_tv"
                 android:fontFamily="@font/inter_regular"
+                android:text="@string/resource_about_tv"
                 android:textColor="@color/white_70p"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/about"
@@ -295,12 +304,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="21dp"
+                android:fontFamily="@font/inter_medium"
                 android:text="@string/resource_available"
                 android:textColor="@color/white"
-                android:fontFamily="@font/inter_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/about" />
+                app:layout_constraintTop_toBottomOf="@+id/aboutTV" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/availableRV"

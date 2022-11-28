@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
                                     val firebaseUserDb = dbRef.child((firebaseUser.uid))
                                     firebaseUserDb.child("email").setValue((firebaseUser.email))
                                     firebaseUserDb.child("username").setValue(username)
-                                    firebaseUserDb.child("profile_image").setValue("")
+                                    //firebaseUserDb.child("profile_image").setValue("")
 
                                     StyleableToast.makeText(
                                         this@RegisterActivity,
