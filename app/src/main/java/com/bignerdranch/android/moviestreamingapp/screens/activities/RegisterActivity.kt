@@ -11,12 +11,17 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.emailET
 import kotlinx.android.synthetic.main.activity_register.passET
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var dbRef : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -48,6 +53,7 @@ class RegisterActivity : AppCompatActivity() {
                     && passET.text.toString().trim {it <= ' '}.length >= 4
         }
 
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users")
         registerBtn.setOnClickListener() {
 
             when {
@@ -70,6 +76,10 @@ class RegisterActivity : AppCompatActivity() {
                                 if (task.isSuccessful) {
                                     //Firebase registered user
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
+                                    val firebaseUserDb = dbRef.child((firebaseUser.uid))
+                                    firebaseUserDb.child("email").setValue((firebaseUser.email))
+                                    firebaseUserDb.child("username").setValue(username)
+                                    firebaseUserDb.child("profile_image").setValue("")
 
                                     StyleableToast.makeText(
                                         this@RegisterActivity,

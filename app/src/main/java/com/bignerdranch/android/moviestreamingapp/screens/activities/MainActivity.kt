@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        //setUpTabs()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -59,14 +58,4 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
     }
-
-    /*private fun setUpTabs() {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-
-        adapter.addFragment(MoviesFragment(), "ФИЛЬМЫ")
-        adapter.addFragment(SeriesFragment(), "СЕРИАЛЫ")
-        adapter.addFragment(FavoriteFragment(), "МОЙ СПИСОК")
-        viewPager.adapter = adapter
-        tabLayout.setupWithViewPager(viewPager)
-    }*/
 }

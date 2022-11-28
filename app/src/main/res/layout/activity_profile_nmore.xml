@@ -36,7 +36,7 @@
     </RelativeLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/avatarImageStroke"
+        android:id="@+id/profileImageStroke"
         android:layout_width="95dp"
         android:layout_height="95dp"
         android:layout_marginStart="18dp"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileNMoreGroupBack"
         app:shapeAppearanceOverlay="@style/Round10dpStyle"
-        app:srcCompat="@drawable/profile_icon"
+        app:srcCompat="@drawable/no_profile_image"
         app:strokeColor="@color/white"
         app:strokeWidth="3dp" />
 
@@ -60,9 +60,9 @@
         android:text="@string/profile_username"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/avatarImageStroke"
-        app:layout_constraintStart_toStartOf="@+id/avatarImageStroke"
-        app:layout_constraintTop_toBottomOf="@+id/avatarImageStroke" />
+        app:layout_constraintEnd_toEndOf="@+id/profileImageStroke"
+        app:layout_constraintStart_toStartOf="@+id/profileImageStroke"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageStroke" />
 
     <RelativeLayout
         android:id="@+id/editProfileGroup"

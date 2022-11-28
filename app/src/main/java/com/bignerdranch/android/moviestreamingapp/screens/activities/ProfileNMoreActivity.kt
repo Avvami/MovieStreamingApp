@@ -5,12 +5,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bignerdranch.android.moviestreamingapp.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_profile_nmore.*
 
 class ProfileNMoreActivity : AppCompatActivity() {
+
+    private lateinit var dbRef : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_nmore)
+
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users")
+        val currentUser = dbRef.child(FirebaseAuth.getInstance().currentUser?.uid!!)
+        currentUser.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val imgRef = snapshot.child("profile_image").value.toString()
+                    if (imgRef.isEmpty()) {
+                        //Do nothing
+                    } else {
+                        Picasso.get().load(imgRef).into(profileImageStroke)
+                    }
+                    usernameTV.text = snapshot.child("username").value.toString()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //Do nothing
+            }
+
+        })
 
         profileNMoreGroupBack.setOnClickListener() {
             onBackPressed()

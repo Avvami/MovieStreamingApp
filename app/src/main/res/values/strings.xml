@@ -24,7 +24,9 @@
 
     <string name="play_btn">Смотреть</string>
     <string name="more_text">Подробнее</string>
+    <string name="category">Категория</string>
 
+    <!--Profile and more activity-->
     <string name="profile_n_more">Профиль &amp; Прочее</string>
     <string name="profile_username">Имя пользователя</string>
     <string name="profile_edit">Редактировать профиль</string>
@@ -47,6 +49,7 @@
     <string name="apply">Применить</string>
     <string name="usernameET">Имя пользователя</string>
 
+    <!--Details fragment-->
     <string name="resource_name">Название ресурса</string>
     <string name="resource_release_year">Год</string>
     <string name="resource_age">Возраст</string>
@@ -61,6 +64,7 @@
     <string name="resource_about_tv">О ресурсе</string>
     <string name="resource_available">Доступно для просмотра:</string>
 
+    <!--old-->
     <string name="app_name">MovieStreamingApp</string>
     <string name="movies">Фильмы</string>
     <string name="series">Сериалы</string>

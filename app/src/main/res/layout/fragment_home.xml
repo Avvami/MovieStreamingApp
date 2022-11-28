@@ -117,7 +117,7 @@
                 android:id="@+id/playBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="68dp"
+                android:layout_marginBottom="90dp"
                 android:background="@drawable/button_white_rounded"
                 app:layout_constraintBottom_toBottomOf="@+id/gradient_bottom"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -128,9 +128,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:paddingStart="14dp"
-                    android:paddingTop="10dp"
+                    android:paddingTop="9dp"
                     android:paddingEnd="14dp"
-                    android:paddingBottom="10dp">
+                    android:paddingBottom="9dp">
 
                     <TextView
                         android:id="@+id/textView4"
@@ -152,6 +152,17 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/playBtn"
+                tools:listitem="@layout/main_recycler_row_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -195,7 +206,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/avatarImage"
+                    android:id="@+id/profileImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="18dp"
@@ -203,7 +214,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView3"
                     app:shapeAppearanceOverlay="@style/Round8dpStyle"
-                    app:srcCompat="@drawable/profile_icon" />
+                    app:srcCompat="@drawable/no_profile_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>

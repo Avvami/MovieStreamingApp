@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileEditGroupBack">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatarImageEdit"
+            android:id="@+id/profileImageEdit"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:contentDescription="@string/icon_description"
@@ -55,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/Round10dpStyle"
-            app:srcCompat="@drawable/profile_icon"/>
+            app:srcCompat="@drawable/no_profile_image"/>
 
         <EditText
             android:id="@+id/profileUsernameET"
@@ -76,17 +76,17 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatarImageEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/profileImageEdit" />
 
         <ImageView
             android:id="@+id/iconEdit"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:contentDescription="@string/icon_description"
-            app:layout_constraintBottom_toBottomOf="@+id/avatarImageEdit"
-            app:layout_constraintEnd_toEndOf="@+id/avatarImageEdit"
-            app:layout_constraintStart_toStartOf="@+id/avatarImageEdit"
-            app:layout_constraintTop_toTopOf="@+id/avatarImageEdit"
+            app:layout_constraintBottom_toBottomOf="@+id/profileImageEdit"
+            app:layout_constraintEnd_toEndOf="@+id/profileImageEdit"
+            app:layout_constraintStart_toStartOf="@+id/profileImageEdit"
+            app:layout_constraintTop_toTopOf="@+id/profileImageEdit"
             app:srcCompat="@drawable/icon_edit" />
 
         <RelativeLayout
