@@ -1,93 +1,91 @@
 package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.bignerdranch.android.moviestreamingapp.R
-import com.bignerdranch.android.moviestreamingapp.screens.activities.ResourceDetailActivity
-import com.bignerdranch.android.moviestreamingapp.data.Resource
-import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
-import com.bignerdranch.android.moviestreamingapp.screens.adapters.RecyclerViewAdapter
+import com.bignerdranch.android.moviestreamingapp.databinding.FragmentMoviesBinding
+import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
+import com.bignerdranch.android.moviestreamingapp.screens.adapters.GridRecyclerAdapter
 import com.google.firebase.database.*
 
 class MoviesFragment : Fragment() {
 
-    private lateinit var dbref : DatabaseReference
-    private lateinit var resourceRecyclerView : RecyclerView
-    private lateinit var resourceArrayList : ArrayList<Resource>
-    private lateinit var resourceArrayListAll : ArrayList<ResourceAllDetails>
+    private lateinit var binding: FragmentMoviesBinding
+    private lateinit var dbRef: DatabaseReference
+    private var gridRecycler: RecyclerView? = null
+    private var gridRecyclerAdapter: GridRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(R.transition.trans_anim)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movies, container, false)
+    ): View {
 
-        resourceRecyclerView = view.findViewById(R.id.RVLayout_m)
-        resourceRecyclerView.layoutManager = LinearLayoutManager(context)
-        resourceRecyclerView.setHasFixedSize(true)
+        binding = FragmentMoviesBinding.inflate(layoutInflater)
 
-        resourceArrayList = arrayListOf<Resource>()
-        resourceArrayListAll = arrayListOf<ResourceAllDetails>()
-        getResourceData()
+        dbRef = FirebaseDatabase.getInstance().reference
+        val dbDBRef = dbRef.child("DB")
 
-        return view
-    }
-
-    private fun getResourceData() {
-
-        dbref = FirebaseDatabase.getInstance().getReference("Movies")
-
-        dbref.addValueEventListener(object : ValueEventListener {
+        dbDBRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    val itemList: MutableList<CategoryItem> = ArrayList()
 
-                    resourceArrayList.clear()
-                    resourceArrayListAll.clear()
-                    for (resourceSnapshot in snapshot.children) {
-
-                        val resource = resourceSnapshot.getValue(Resource::class.java)
-                        val resourceAll = resourceSnapshot.getValue(ResourceAllDetails::class.java)
-                        resourceArrayList.add(resource!!)
-                        resourceArrayListAll.add(resourceAll!!)
-                    }
-                    val itAdapter = RecyclerViewAdapter(resourceArrayList)
-                    resourceRecyclerView.adapter = itAdapter
-
-                    itAdapter.setOnItemClickListener(object : RecyclerViewAdapter.OnItemClickListener {
-                        override fun onItemClick(position: Int) {
-
-                            val intent = Intent(activity, ResourceDetailActivity::class.java)
-
-                            intent.putExtra("resource_age", resourceArrayListAll[position].age)
-                            intent.putExtra("resource_description", resourceArrayListAll[position].description)
-                            intent.putExtra("resource_duration", resourceArrayListAll[position].duration)
-                            intent.putExtra("resource_genre", resourceArrayListAll[position].genre)
-                            intent.putExtra("resource_main_poster", resourceArrayListAll[position].main_poster)
-                            intent.putExtra("resource_name", resourceArrayListAll[position].name)
-                            intent.putExtra("resource_poster", resourceArrayListAll[position].poster)
-                            intent.putExtra("resource_year", resourceArrayListAll[position].year)
-                            intent.putExtra("resource_isMovie", resourceArrayListAll[position].movie)
-                            intent.putExtra("resource_about", resourceArrayListAll[position].about)
-                            intent.putExtra("resource_inList", resourceArrayListAll[position].favorite)
-                            activity?.startActivity(intent)
+                    snapshot.children.forEach { foreach ->
+                        if (foreach.child("movie").value == true) {
+                            val title = foreach.key.toString()
+                            val imageUrl = foreach.child("poster_min").value.toString()
+                            itemList.add(CategoryItem(title, imageUrl))
+                        } else {
+                            //Do nothing
                         }
-                    })
+                    }
+
+                    setGridRecycler(itemList)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //Do nothing
+                Log.d("TAG", error.message)
             }
         })
+
+        binding.moviesGroupBack.setOnClickListener{
+            fragmentManager?.popBackStack()
+        }
+
+        return binding.root
+    }
+
+    private fun setGridRecycler(item: List<CategoryItem>) {
+        gridRecycler = binding.moviesRV
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 3)
+        gridRecycler!!.layoutManager = layoutManager
+        gridRecyclerAdapter = context?.let { GridRecyclerAdapter(it, item) }
+        gridRecycler!!.adapter = gridRecyclerAdapter
+
+        gridRecyclerAdapter?.onItemClickListener(object : GridRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val bundle = Bundle()
+                bundle.putString("title", item[position].itemName)
+                bundle.putString("preview_image", item[position].imageUrl)
+                val fragment = DetailsFragment()
+                fragment.arguments = bundle
+                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+            }
+
+        })
+
     }
 }

@@ -3,11 +3,8 @@ package com.bignerdranch.android.moviestreamingapp.screens.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.bignerdranch.android.moviestreamingapp.data.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 
 class SplashScreenActivity : AppCompatActivity() {
 

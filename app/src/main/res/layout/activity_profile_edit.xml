@@ -7,6 +7,16 @@
     android:background="@color/black"
     tools:context=".screens.activities.ProfileEditActivity">
 
+    <View
+        android:id="@+id/blackView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toBottomOf="@id/profileEditGroupBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/profileEditGroupBack"
         android:layout_width="wrap_content"
@@ -43,19 +53,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEditGroupBack">
+        app:layout_constraintTop_toBottomOf="@id/blackView7">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profileImageEdit"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:contentDescription="@string/icon_description"
-            android:tint="@color/black_60p"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/Round10dpStyle"
-            app:srcCompat="@drawable/no_profile_image"/>
+            app:shapeAppearanceOverlay="@style/Round6dpStyle"
+            app:srcCompat="@drawable/no_profile_image" />
 
         <EditText
             android:id="@+id/profileUsernameET"
@@ -64,32 +73,22 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_text_rounded"
             android:ems="10"
+            android:hint="@string/username_et"
             android:inputType="text"
             android:paddingStart="18dp"
             android:paddingTop="15dp"
             android:paddingEnd="18dp"
             android:paddingBottom="15dp"
-            android:textCursorDrawable="@drawable/cursor_white"
-            android:hint="@string/usernameET"
-            android:textColorHint="@color/white"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@drawable/cursor_white"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileImageEdit" />
 
-        <ImageView
-            android:id="@+id/iconEdit"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:contentDescription="@string/icon_description"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImageEdit"
-            app:layout_constraintEnd_toEndOf="@+id/profileImageEdit"
-            app:layout_constraintStart_toStartOf="@+id/profileImageEdit"
-            app:layout_constraintTop_toTopOf="@+id/profileImageEdit"
-            app:srcCompat="@drawable/icon_edit" />
-
         <RelativeLayout
+            android:id="@+id/applyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -110,5 +109,26 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white_80p"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profileImageEdit"
+            app:layout_constraintEnd_toEndOf="@+id/profileImageEdit">
+
+            <ImageView
+                android:id="@+id/iconEdit"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginVertical="6dp"
+                android:layout_marginHorizontal="6dp"
+                android:contentDescription="@string/icon_description"
+                app:srcCompat="@drawable/icon_edit"
+                app:tint="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

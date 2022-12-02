@@ -4,30 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
-import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.activity_profile_nmore.*
 
 class ProfileNMoreActivity : AppCompatActivity() {
 
-    private lateinit var dbRef : DatabaseReference
+    private lateinit var dbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_nmore)
 
-        dbRef = FirebaseDatabase.getInstance().reference.child("Users")
-        val currentUser = dbRef.child(FirebaseAuth.getInstance().currentUser?.uid!!)
-        currentUser.addValueEventListener(object : ValueEventListener {
+        dbRef = FirebaseDatabase.getInstance().reference
+        val userRef = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val imgRef = snapshot.child("profile_image").value.toString()
-                    if (imgRef.isEmpty()) {
-                        //Do nothing
+                    val profileImageRef = snapshot.child("profile_image")
+                    if (profileImageRef.exists()) {
+                        Glide.with(applicationContext).load(profileImageRef.value).into(profileImageStroke)
                     } else {
-                        Picasso.get().load(imgRef).into(profileImageStroke)
+                        //No profile image
                     }
                     usernameTV.text = snapshot.child("username").value.toString()
                 }
@@ -39,11 +38,11 @@ class ProfileNMoreActivity : AppCompatActivity() {
 
         })
 
-        profileNMoreGroupBack.setOnClickListener() {
+        profileNMoreGroupBack.setOnClickListener {
             onBackPressed()
         }
 
-        signOut.setOnClickListener() {
+        signOutBtn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this@ProfileNMoreActivity, StartupScreenActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -51,27 +50,27 @@ class ProfileNMoreActivity : AppCompatActivity() {
             finish()
         }
 
-        editProfileGroup.setOnClickListener() {
+        editProfileGroup.setOnClickListener {
             startActivity(Intent(this@ProfileNMoreActivity, ProfileEditActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
-        notificationGroup.setOnClickListener() {
+        notificationGroup.setOnClickListener {
             startActivity(Intent(this@ProfileNMoreActivity, NotificationsActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
-        myListGroup.setOnClickListener() {
+        myListGroup.setOnClickListener {
             startActivity(Intent(this@ProfileNMoreActivity, MyListActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
-        accountGroup.setOnClickListener() {
+        accountGroup.setOnClickListener {
             startActivity(Intent(this@ProfileNMoreActivity, AccountSettingActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
-        aboutGroup.setOnClickListener() {
+        aboutGroup.setOnClickListener {
             startActivity(Intent(this@ProfileNMoreActivity, AboutAppActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }

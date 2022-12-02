@@ -1,32 +1,38 @@
-package com.bignerdranch.android.moviestreamingapp.screens.activities
+package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.FragmentMyListBinding
 import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.GridRecyclerAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_my_list.*
+import com.google.firebase.database.*
 
+class MyListFragment : Fragment() {
 
-class MyListActivity : AppCompatActivity() {
-
+    private lateinit var binding: FragmentMyListBinding
     private lateinit var dbRef: DatabaseReference
     private var gridRecycler: RecyclerView? = null
     private var gridRecyclerAdapter: GridRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_list)
+        //sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(R.transition.trans_anim)
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        binding = FragmentMyListBinding.inflate(layoutInflater)
 
         dbRef = FirebaseDatabase.getInstance().reference
 
@@ -61,30 +67,28 @@ class MyListActivity : AppCompatActivity() {
             }
         })
 
-        myListGroupBack.setOnClickListener() {
-            onBackPressed()
+        binding.myListGroupBack.setOnClickListener{
+            fragmentManager?.popBackStack()
         }
-    }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right)
+        return binding.root
     }
 
     private fun setGridRecycler(item: List<CategoryItem>) {
-        gridRecycler = myListRV
-        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this@MyListActivity, 3)
+        gridRecycler = binding.myListRV
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 3)
         gridRecycler!!.layoutManager = layoutManager
-        gridRecyclerAdapter = GridRecyclerAdapter(this@MyListActivity, item)
+        gridRecyclerAdapter = context?.let { GridRecyclerAdapter(it, item) }
         gridRecycler!!.adapter = gridRecyclerAdapter
 
         gridRecyclerAdapter?.onItemClickListener(object : GridRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val intent = Intent(this@MyListActivity, DetailsActivity::class.java)
-                intent.putExtra("title", item[position].itemName)
-                intent.putExtra("preview_image", item[position].imageUrl)
-                startActivity(intent)
+                val bundle = Bundle()
+                bundle.putString("title", item[position].itemName)
+                bundle.putString("preview_image", item[position].imageUrl)
+                val fragment = DetailsFragment()
+                fragment.arguments = bundle
+                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
             }
 
         })

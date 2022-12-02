@@ -1,16 +1,6 @@
 package com.bignerdranch.android.moviestreamingapp.screens.activities
 
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.ToggleButton
-import com.bignerdranch.android.moviestreamingapp.R
-import com.bignerdranch.android.moviestreamingapp.data.ResourceAllDetails
-import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.squareup.picasso.Picasso
 
 class ResourceDetailActivity : AppCompatActivity() {
 

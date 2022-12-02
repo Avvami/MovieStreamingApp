@@ -7,11 +7,21 @@
     android:background="@color/black"
     tools:context=".screens.activities.ProfileNMoreActivity">
 
+    <View
+        android:id="@+id/blackView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toBottomOf="@id/profileNMoreGroupBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/profileNMoreGroupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,14 +49,14 @@
         android:id="@+id/profileImageStroke"
         android:layout_width="95dp"
         android:layout_height="95dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
         android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileNMoreGroupBack"
-        app:shapeAppearanceOverlay="@style/Round10dpStyle"
+        app:layout_constraintTop_toBottomOf="@id/blackView6"
+        app:shapeAppearanceOverlay="@style/Round6dpStyle"
         app:srcCompat="@drawable/no_profile_image"
         app:strokeColor="@color/white"
         app:strokeWidth="3dp" />
@@ -68,13 +78,13 @@
         android:id="@+id/editProfileGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="18dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingEnd="14dp"
+        android:layout_marginEnd="16dp"
         android:paddingStart="14dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameTV">
@@ -103,9 +113,9 @@
         android:id="@+id/notificationGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/background_relative_group"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -153,9 +163,9 @@
         android:id="@+id/myListGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/background_relative_group"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -204,9 +214,9 @@
         android:id="@+id/accountGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/background_relative_group"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -254,9 +264,9 @@
         android:id="@+id/aboutGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/background_relative_group"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -300,23 +310,32 @@
             app:tint="@color/white_40p" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/signOut"
+    <RelativeLayout
+        android:id="@+id/signOutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="18dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingEnd="10dp"
+        android:layout_marginEnd="16dp"
         android:paddingStart="10dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/sign_out"
-        android:textColor="@color/white_80p"
-        android:textSize="16sp"
+        android:paddingTop="4dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/aboutGroup">
+
+        <TextView
+            android:id="@+id/signOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:layout_centerInParent="true"
+            android:text="@string/sign_out"
+            android:textColor="@color/white_80p"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

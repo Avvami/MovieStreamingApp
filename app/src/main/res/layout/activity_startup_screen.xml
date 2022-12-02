@@ -8,7 +8,6 @@
     tools:context=".screens.activities.StartupScreenActivity">
 
 
-
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="wrap_content"

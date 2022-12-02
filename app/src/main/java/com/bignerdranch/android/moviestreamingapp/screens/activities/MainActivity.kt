@@ -5,46 +5,43 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityMainBinding
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.HomeFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.MoreFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.SearchFragment
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.SoonFragment
 import io.github.muddz.styleabletoast.StyleableToast
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding/*
     private lateinit var homeFragment: HomeFragment
     private lateinit var soonFragment: SoonFragment
     private lateinit var searchFragment: SearchFragment
-    private lateinit var moreFragment: MoreFragment
+    private lateinit var moreFragment: MoreFragment*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        homeFragment = HomeFragment()
+        /*homeFragment = HomeFragment()
         soonFragment = SoonFragment()
         searchFragment = SearchFragment()
-        moreFragment = MoreFragment()
+        moreFragment = MoreFragment()*/
 
-        replaceFragment(homeFragment)
+        replaceFragment(HomeFragment())
 
-        bottomNavigationView?.setOnItemSelectedListener() {
+        binding.bottomNavigationView?.setOnItemSelectedListener {
 
             when (it.itemId) {
-                R.id.home -> replaceFragment(homeFragment)
-                R.id.soon -> replaceFragment(soonFragment)
-                R.id.search -> replaceFragment(searchFragment)
-                R.id.more -> replaceFragment(moreFragment)
+                R.id.home -> replaceFragment(HomeFragment())
+                R.id.soon -> replaceFragment(SoonFragment())
+                R.id.search -> replaceFragment(SearchFragment())
+                R.id.more -> replaceFragment(MoreFragment())
 
                 else -> {
-                    StyleableToast.makeText(
-                    this@MainActivity,
-                    "Что-то пошло не так",
-                    Toast.LENGTH_SHORT,
-                        R.style.CustomToastStyle
-                ).show()}
+                    StyleableToast.makeText(this@MainActivity, "Что-то пошло не так", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show()}
             }
             true
         }

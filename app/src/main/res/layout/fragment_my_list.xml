@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".screens.fragments.MoviesFragment">
+    tools:context=".screens.fragments.MyListFragment">
 
     <View
-        android:id="@+id/blackView3"
+        android:id="@+id/blackView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="-10dp"
-        app:layout_constraintBottom_toBottomOf="@id/moviesGroupBack"
+        app:layout_constraintBottom_toBottomOf="@id/myListGroupBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/moviesGroupBack"
+        android:id="@+id/myListGroupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -34,21 +34,20 @@
             app:srcCompat="@drawable/icon_left_arrow" />
 
         <TextView
-            android:id="@+id/movies"
-            android:transitionName="moviesFragment"
+            android:id="@+id/myList"
+            android:transitionName="myListFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@id/leftArrowImage"
             android:fontFamily="@font/inter_bold"
-            android:text="@string/movies"
+            android:text="@string/my_list"
             android:textColor="@color/white"
             android:textSize="22sp" />
-
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moviesRV"
+        android:id="@+id/myListRV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -56,5 +55,7 @@
         android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/blackView3" />
+        app:layout_constraintTop_toBottomOf="@id/blackView4">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

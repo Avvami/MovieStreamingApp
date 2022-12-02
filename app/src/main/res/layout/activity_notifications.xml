@@ -7,6 +7,16 @@
     android:background="@color/black"
     tools:context=".screens.activities.NotificationsActivity">
 
+    <View
+        android:id="@+id/blackView8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toBottomOf="@id/notificationsGroupBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/notificationsGroupBack"
         android:layout_width="wrap_content"
@@ -40,13 +50,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="18dp"
-        android:textColor="@color/white_80p"
-        android:textSize="16sp"
         android:fontFamily="@font/inter_bold"
         android:text="@string/notifications_settings"
+        android:textColor="@color/white_80p"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationsGroupBack" />
+        app:layout_constraintTop_toBottomOf="@id/blackView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

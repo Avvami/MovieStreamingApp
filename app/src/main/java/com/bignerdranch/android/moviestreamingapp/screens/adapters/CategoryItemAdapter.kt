@@ -12,6 +12,7 @@ import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
 import com.bignerdranch.android.moviestreamingapp.screens.fragments.DetailsFragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class CategoryItemAdapter(private val context: Context, private val categoryItem: List<CategoryItem>) : RecyclerView.Adapter<CategoryItemAdapter.CategoryItemViewHolder>() {
 
@@ -28,7 +29,7 @@ class CategoryItemAdapter(private val context: Context, private val categoryItem
     }
 
     override fun onBindViewHolder(holder: CategoryItemViewHolder, position: Int) {
-        Glide.with(context).load(categoryItem[position].imageUrl).into(holder.imageView)
+        Glide.with(context).load(categoryItem[position].imageUrl).apply(RequestOptions().dontTransform()).into(holder.imageView)
         holder.imageView.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("title", categoryItem[position].itemName)

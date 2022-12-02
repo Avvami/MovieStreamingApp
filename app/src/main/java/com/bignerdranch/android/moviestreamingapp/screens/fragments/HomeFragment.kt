@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
@@ -17,6 +18,7 @@ import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
 import com.bignerdranch.android.moviestreamingapp.screens.activities.ProfileNMoreActivity
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.MainRecyclerAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import io.github.muddz.styleabletoast.StyleableToast
@@ -49,14 +51,14 @@ class HomeFragment : Fragment() {
                     fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
                 }
 
-                binding.previewImage.setOnClickListener {
+                /*binding.previewImage.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putString("title", previewTitle)
                     bundle.putString("preview_image", previewUrl)
                     val fragment = DetailsFragment()
                     fragment.arguments = bundle
                     fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
-                }
+                }*/
 
                 //String to mutableList
                 var userFavouriteTemp = userFavourite
@@ -101,6 +103,21 @@ class HomeFragment : Fragment() {
             activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
+        binding.seriesRL.setOnClickListener {
+            val fragment = SeriesFragment()
+            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+        }
+
+        binding.moviesRL.setOnClickListener {
+            val fragment = MoviesFragment()
+            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+        }
+
+        binding.myListRL.setOnClickListener {
+            val fragment = MyListFragment()
+            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+        }
+
         return binding.root
     }
 
@@ -124,14 +141,14 @@ class HomeFragment : Fragment() {
                     val previewTitle: String = homePreview.child("Home").value.toString()
                     val previewUrl: String = dbDBRef.child(previewTitle).child("poster_min").value.toString()
                     val previewLargeUrl = dbDBRef.child(previewTitle).child("poster").value.toString()
-                    Glide.with(this@HomeFragment).load(previewLargeUrl).into(binding.previewImage)
+                    context?.let { Glide.with(it).load(previewLargeUrl).apply(RequestOptions().dontTransform()).into(binding.previewImage) }
 
                     //User
                     val profileImageRef = currentUserRef.child("profile_image")
                     val myListRef = currentUserRef.child("my_list")
 
                     if (profileImageRef.exists()) {
-                        Glide.with(this@HomeFragment).load(profileImageRef.value).into(binding.profileImage)
+                        context?.let { Glide.with(it).load(profileImageRef.value).into(binding.profileImage) }
                     } else {
                         //No profile image
                     }

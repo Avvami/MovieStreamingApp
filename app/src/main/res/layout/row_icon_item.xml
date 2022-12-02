@@ -11,12 +11,11 @@
     android:layout_marginHorizontal="4dp">
 
     <ImageView
-        android:id="@+id/itemImage"
-        android:transitionName="preview_image"
-        android:layout_width="108dp"
-        android:layout_height="162dp"
+        android:id="@+id/itemIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/image_description"
         android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"/>
 
 </androidx.cardview.widget.CardView>
