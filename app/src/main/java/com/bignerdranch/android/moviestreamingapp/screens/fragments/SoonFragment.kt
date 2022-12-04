@@ -12,6 +12,7 @@ import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.databinding.FragmentSoonBinding
 import com.bignerdranch.android.moviestreamingapp.model.SoonItem
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.SoonRecyclerAdapter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class SoonFragment : Fragment() {
@@ -72,7 +73,7 @@ class SoonFragment : Fragment() {
         soonRecyclerAdapter = context?.let { SoonRecyclerAdapter(it, item) }
         soonRecycler!!.adapter = soonRecyclerAdapter
 
-        soonRecyclerAdapter?.onItemClickListener(object : SoonRecyclerAdapter.OnItemClickListener{
+        soonRecyclerAdapter?.onItemClickListener(object : SoonRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
                 bundle.putString("title", item[position].itemName)

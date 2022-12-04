@@ -117,10 +117,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".screens.activities.ResourceDetailActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".screens.activities.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

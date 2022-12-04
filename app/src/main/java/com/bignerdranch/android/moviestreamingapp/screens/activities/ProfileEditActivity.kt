@@ -5,19 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityProfileEditBinding
+import com.bignerdranch.android.moviestreamingapp.extentions.hideKeyboard
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import io.github.muddz.styleabletoast.StyleableToast
-import kotlinx.android.synthetic.main.activity_profile_edit.*
 
 class ProfileEditActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityProfileEditBinding
     private lateinit var dbRef : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_edit)
+        binding = ActivityProfileEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbRef = FirebaseDatabase.getInstance().reference
         val userRef = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
@@ -26,11 +29,11 @@ class ProfileEditActivity : AppCompatActivity() {
                 if (snapshot.exists()) {
                     val profileImageRef = snapshot.child("profile_image")
                     if (profileImageRef.exists()) {
-                        Glide.with(applicationContext).load(profileImageRef.value).into(profileImageEdit)
+                        Glide.with(applicationContext).load(profileImageRef.value).into(binding.profileImageEdit)
                     } else {
                         //No profile image
                     }
-                    profileUsernameET.setText(snapshot.child("username").value.toString())
+                    binding.profileUsernameET.setText(snapshot.child("username").value.toString())
                 }
             }
 
@@ -40,13 +43,14 @@ class ProfileEditActivity : AppCompatActivity() {
 
         })
 
-        profileImageEdit.setOnClickListener {
+        binding.profileImageEdit.setOnClickListener {
             startActivity(Intent(this@ProfileEditActivity, ChangeProfileIconActivity::class.java))
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
         }
 
-        applyBtn.setOnClickListener {
-            val newUsername = profileUsernameET.text.toString()
+        binding.applyBtn.setOnClickListener {
+            hideKeyboard()
+            val newUsername = binding.profileUsernameET.text.toString()
             if (newUsername.isEmpty()) {
                 StyleableToast.makeText(
                     this@ProfileEditActivity,
@@ -59,7 +63,11 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         }
 
-        profileEditGroupBack.setOnClickListener() {
+        binding.root.setOnClickListener {
+            hideKeyboard()
+        }
+
+        binding.profileEditGroupBack.setOnClickListener {
             onBackPressed()
         }
     }

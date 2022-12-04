@@ -16,6 +16,7 @@
         android:layout_height="168dp"
         android:contentDescription="@string/image_description"
         android:scaleType="centerCrop"
+        android:background="@drawable/ripple_effect_w40r6rec"
         tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.cardview.widget.CardView>

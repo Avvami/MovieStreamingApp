@@ -3,17 +3,14 @@ package com.bignerdranch.android.moviestreamingapp.screens.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.model.AllCategory
 import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
 import com.bignerdranch.android.moviestreamingapp.databinding.ActivityChangeProfileIconBinding
-import com.bignerdranch.android.moviestreamingapp.screens.adapters.CategoryIconAdapter
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.MainRecyclerIconAdapter
 import com.google.firebase.database.*
-import io.github.muddz.styleabletoast.StyleableToast
 
 class ChangeProfileIconActivity : AppCompatActivity() {
 

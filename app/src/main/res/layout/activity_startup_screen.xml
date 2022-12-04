@@ -24,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/inter_bold"
         android:text="#logo"
@@ -34,33 +34,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/loginLink"
+    <RelativeLayout
+        android:id="@+id/loginLinkBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:fontFamily="@font/inter_semibold"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textIsSelectable="false"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginEnd="16dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:background="@drawable/ripple_effect_w40rec"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView">
+
+        <TextView
+            android:id="@+id/loginLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/introText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="18dp"
         android:fontFamily="@font/inter_bold"
         android:text="@string/heading1"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/sideIntroText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -69,38 +79,37 @@
         android:id="@+id/sideIntroText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="65dp"
         android:fontFamily="@font/inter_medium"
         android:text="@string/heading2"
         android:textAlignment="center"
         android:textColor="@color/white_70p"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/registerLink"
+        app:layout_constraintBottom_toTopOf="@+id/registerLinkBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/registerLink"
+        android:id="@+id/registerLinkBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="30dp"
+        android:paddingVertical="10dp"
         android:background="@drawable/button_white_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/registerLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_semibold"
             android:layout_centerInParent="true"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:fontFamily="@font/inter_semibold"
             android:text="@string/get_started"
             android:textColor="@color/black"
             android:textSize="20sp" />

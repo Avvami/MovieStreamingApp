@@ -3,14 +3,18 @@ package com.bignerdranch.android.moviestreamingapp.screens.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bignerdranch.android.moviestreamingapp.R
-import kotlinx.android.synthetic.main.activity_about_app.*
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityAboutAppBinding
 
 class AboutAppActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAboutAppBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_app)
+        binding = ActivityAboutAppBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        aboutAppGroupBack.setOnClickListener() {
+        binding.aboutAppGroupBack.setOnClickListener {
             onBackPressed()
         }
     }

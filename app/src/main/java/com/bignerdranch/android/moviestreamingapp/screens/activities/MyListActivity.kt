@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityMyListBinding
 import com.bignerdranch.android.moviestreamingapp.model.CategoryItem
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.GridRecyclerAdapter
 import com.google.firebase.auth.FirebaseAuth
@@ -15,18 +16,19 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_my_list.*
 
 
 class MyListActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMyListBinding
     private lateinit var dbRef: DatabaseReference
     private var gridRecycler: RecyclerView? = null
     private var gridRecyclerAdapter: GridRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_list)
+        binding = ActivityMyListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbRef = FirebaseDatabase.getInstance().reference
 
@@ -61,7 +63,7 @@ class MyListActivity : AppCompatActivity() {
             }
         })
 
-        myListGroupBack.setOnClickListener() {
+        binding.myListGroupBack.setOnClickListener() {
             onBackPressed()
         }
     }
@@ -73,7 +75,7 @@ class MyListActivity : AppCompatActivity() {
     }
 
     private fun setGridRecycler(item: List<CategoryItem>) {
-        gridRecycler = myListRV
+        gridRecycler = binding.myListRV
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this@MyListActivity, 3)
         gridRecycler!!.layoutManager = layoutManager
         gridRecyclerAdapter = GridRecyclerAdapter(this@MyListActivity, item)

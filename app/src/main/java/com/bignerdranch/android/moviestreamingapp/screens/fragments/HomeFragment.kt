@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
             override fun onCallBack(previewTitle: String, previewUrl: String, userFavourite: String) {
 
                 binding.moreGroup.setOnClickListener {
+                    Log.d("TAG", "wow")
                     val bundle = Bundle()
                     bundle.putString("title", previewTitle)
                     bundle.putString("preview_image", previewUrl)
@@ -51,20 +52,13 @@ class HomeFragment : Fragment() {
                     fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
                 }
 
-                /*binding.previewImage.setOnClickListener {
-                    val bundle = Bundle()
-                    bundle.putString("title", previewTitle)
-                    bundle.putString("preview_image", previewUrl)
-                    val fragment = DetailsFragment()
-                    fragment.arguments = bundle
-                    fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
-                }*/
-
                 //String to mutableList
                 var userFavouriteTemp = userFavourite
                 val previewIsChecked: Boolean
                 if (userFavouriteTemp.endsWith(";"))
                     userFavouriteTemp = userFavouriteTemp.substring(0, userFavouriteTemp.length - 1)
+                if (userFavouriteTemp.startsWith(";"))
+                    userFavouriteTemp = userFavouriteTemp.substring(1, userFavouriteTemp.length)
                 val userFavouriteList = userFavouriteTemp.split(";").map {  it.trim() }.toMutableList()
 
                 //Check if banner exists

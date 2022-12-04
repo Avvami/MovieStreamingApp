@@ -7,11 +7,22 @@
     android:background="@color/black"
     tools:context=".screens.activities.LoginActivity">
 
+    <View
+        android:id="@+id/blackView14"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-10dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/loginGroupBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/loginGroupBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/icon_description"
+            android:foreground="@drawable/ripple_effect_w40ov"
             app:srcCompat="@drawable/icon_left_arrow" />
 
         <TextView
@@ -39,8 +51,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/pass_hint"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -102,35 +114,66 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passLayout" />
 
-        <TextView
-            android:id="@+id/firstTimeRef"
+        <RelativeLayout
+            android:id="@+id/forgotPasswordBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/inter_semibold"
-            android:text="@string/first_time"
-            android:textColor="@color/white_90p"
-            android:textSize="14sp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/ripple_effect_w40rec"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signinBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/signinBtn">
+
+            <TextView
+                android:id="@+id/forgotPasswordRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/forgot_password"
+                android:textColor="@color/white_90p"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/firstTimeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/ripple_effect_w40rec"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forgotPasswordBtn">
+
+            <TextView
+                android:id="@+id/firstTimeRef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/first_time_ref"
+                android:textColor="@color/white_90p"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/rightsText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="18dp"
             android:fontFamily="@font/inter_regular"
             android:text="@string/rights"
             android:textColor="@color/white_70p"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstTimeRef" />
+            app:layout_constraintTop_toBottomOf="@+id/firstTimeBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

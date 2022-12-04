@@ -8,63 +8,63 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import io.github.muddz.styleabletoast.StyleableToast
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.emailET
-import kotlinx.android.synthetic.main.activity_login.emailLayout
-import kotlinx.android.synthetic.main.activity_login.passET
-import kotlinx.android.synthetic.main.activity_login.passLayout
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        emailET.addTextChangedListener() {
-            if (Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
-                emailLayout.error = null
+        binding.emailET.addTextChangedListener {
+            if (Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches()) {
+                binding.emailLayout.error = null
             }
         }
 
-        emailET.setOnFocusChangeListener {_, hasFocus ->
+        binding.emailET.setOnFocusChangeListener {_, hasFocus ->
             if (!hasFocus) {
-                if (!Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
-                    emailLayout.error = "Некорректный адрес электронной почты"
+                if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches()) {
+                    binding.emailLayout.error = "Некорректный адрес электронной почты"
                 }
             }
         }
 
-        passET.addTextChangedListener() {
-            if (passET.text.toString().length >= 4) {
-                passLayout.error = null
+        binding.passET.addTextChangedListener {
+            if (binding.passET.text.toString().length >= 4) {
+                binding.passLayout.error = null
             }
         }
 
-        signinBtn.setOnClickListener() {
+        binding.signinBtn.setOnClickListener {
             when {
 
-                TextUtils.isEmpty(emailET.text.toString().trim {it <= ' '}) -> {
-                    emailLayout.error = "Пожалуйста, введите адрес электронной почты"
-                    emailET.requestFocus()
+                TextUtils.isEmpty(binding.emailET.text.toString().trim {it <= ' '}) -> {
+                    binding.emailLayout.error = "Пожалуйста, введите адрес электронной почты"
+                    binding.emailET.requestFocus()
                 }
 
-                !Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches() -> {
-                    emailLayout.error = "Некорректный адрес электронной почты"
-                    emailET.requestFocus()
+                !Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches() -> {
+                    binding.emailLayout.error = "Некорректный адрес электронной почты"
+                    binding.emailET.requestFocus()
                 }
 
-                TextUtils.isEmpty(passET.text.toString().trim {it <= ' '}) -> {
-                    passLayout.error = "Пожалуйста, введите пароль"
-                    passET.requestFocus()
+                TextUtils.isEmpty(binding.passET.text.toString().trim {it <= ' '}) -> {
+                    binding.passLayout.error = "Пожалуйста, введите пароль"
+                    binding.passET.requestFocus()
                 }
                 else -> {
 
-                    val email: String = emailET.text.toString().trim {it <= ' '}
-                    val password: String = passET.text.toString().trim {it <= ' '}
+                    val email: String = binding.emailET.text.toString().trim {it <= ' '}
+                    val password: String = binding.passET.text.toString().trim {it <= ' '}
 
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener() { task ->
+                        .addOnCompleteListener { task ->
 
                             if (task.isSuccessful) {
                                 StyleableToast.makeText(
@@ -92,11 +92,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        firstTimeRef.setOnClickListener() {
+        binding.firstTimeBtn.setOnClickListener {
             onBackPressed()
         }
 
-        loginGroupBack.setOnClickListener() {
+        binding.loginGroupBack.setOnClickListener{
             onBackPressed()
         }
     }

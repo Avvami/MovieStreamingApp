@@ -4,8 +4,11 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityDetailsBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.request.RequestOptions
@@ -14,25 +17,26 @@ import com.google.firebase.database.*
 import io.github.muddz.styleabletoast.StyleableToast
 import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.ColorFilterTransformation
-import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDetailsBinding
     private lateinit var dbRef: DatabaseReference
     private lateinit var title: String
     private lateinit var imageUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbRef = FirebaseDatabase.getInstance().reference
 
         title = intent.getStringExtra("title").toString()
         imageUrl = intent.getStringExtra("preview_image").toString()
 
-        resourceTV.text = title
-        Glide.with(this@DetailsActivity).load(imageUrl).apply(RequestOptions().dontTransform()).into(posterImage)
+        binding.resourceTV.text = title
+        Glide.with(this@DetailsActivity).load(imageUrl).apply(RequestOptions().dontTransform()).into(binding.posterImage)
 
         getDataFromFirebase(object : Callback {
             override fun onCallback(title: String, userFavourite: String) {
@@ -46,14 +50,14 @@ class DetailsActivity : AppCompatActivity() {
 
                 //Check if banner exists
                 previewIsChecked = if (userFavouriteList.contains(title)) {
-                    myListImage.setImageResource(R.drawable.icon_approve)
+                    binding.myListImage.setImageResource(R.drawable.icon_approve)
                     true
                 } else {
-                    myListImage.setImageResource(R.drawable.icon_plus)
+                    binding.myListImage.setImageResource(R.drawable.icon_plus)
                     false
                 }
 
-                myListGroup.setOnClickListener {
+                binding.myListGroup.setOnClickListener {
                     val dbUserRef = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid!!)
                     val updatedUserFavorite: String
 
@@ -75,7 +79,7 @@ class DetailsActivity : AppCompatActivity() {
 
         })
 
-        resourceGroupBack.setOnClickListener {
+        binding.resourceGroupBack.setOnClickListener {
             onBackPressed()
         }
     }
@@ -96,17 +100,17 @@ class DetailsActivity : AppCompatActivity() {
                     val multiTransformation = MultiTransformation(
                         BlurTransformation(50, 3), ColorFilterTransformation(Color.argb(50, 0, 0, 0))
                     )
-                    Glide.with(applicationContext).load(itemRef.child("poster").value).apply(RequestOptions.bitmapTransform(multiTransformation)).into(posterBlurImage)
-                    yearTV.text = itemRef.child("year").value.toString()
-                    ageTV.text = itemRef.child("age").value.toString()
-                    durationTV.text = itemRef.child("duration").value.toString()
-                    descriptionTV.text = itemRef.child("synopsis").value.toString()
-                    castTV.text = itemRef.child("cast").value.toString()
-                    genresTV.text = itemRef.child("genre").value.toString()
+                    Glide.with(applicationContext).load(itemRef.child("poster").value).apply(RequestOptions.bitmapTransform(multiTransformation)).into(binding.posterBlurImage)
+                    binding.yearTV.text = itemRef.child("year").value.toString()
+                    binding.ageTV.text = itemRef.child("age").value.toString()
+                    binding.durationTV.text = itemRef.child("duration").value.toString()
+                    binding.descriptionTV.text = itemRef.child("synopsis").value.toString()
+                    binding.castTV.text = itemRef.child("cast").value.toString()
+                    binding.genresTV.text = itemRef.child("genre").value.toString()
                     if (itemRef.child("movie").value == false) {
-                        about.text = "О сериале:"
-                    } else about.text = "О фильме:"
-                    aboutTV.text = itemRef.child("about").value.toString()
+                        binding.about.text = "О сериале:"
+                    } else binding.about.text = "О фильме:"
+                    binding.aboutTV.text = itemRef.child("about").value.toString()
 
                     //User
                     val myListRef = currentUserRef.child("my_list")

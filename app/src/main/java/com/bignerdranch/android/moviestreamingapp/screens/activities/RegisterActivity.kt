@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityRegisterBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -14,59 +15,58 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import io.github.muddz.styleabletoast.StyleableToast
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_register.emailET
-import kotlinx.android.synthetic.main.activity_register.passET
 
 class RegisterActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityRegisterBinding
     private lateinit var dbRef : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        emailET.addTextChangedListener() {
-            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
-                    && passET.text.toString().trim {it <= ' '}.length >= 4
+        binding.emailET.addTextChangedListener {
+            binding.registerBtn.isEnabled = binding.usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && binding.passET.text.toString().trim {it <= ' '}.length >= 4
 
-            if (Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
-                emailLayout.error = null
+            if (Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches()) {
+                binding.emailLayout.error = null
             }
         }
 
-        emailET.setOnFocusChangeListener {_, hasFocus ->
+        binding.emailET.setOnFocusChangeListener {_, hasFocus ->
             if (!hasFocus) {
-                if (!Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches()) {
-                    emailLayout.error = "Некорректный адрес электронной почты"
+                if (!Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches()) {
+                    binding.emailLayout.error = "Некорректный адрес электронной почты"
                 }
             }
         }
 
-        usernameET.addTextChangedListener() {
-            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
-                    && passET.text.toString().trim {it <= ' '}.length >= 4
+        binding.usernameET.addTextChangedListener {
+            binding.registerBtn.isEnabled = binding.usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && binding.passET.text.toString().trim {it <= ' '}.length >= 4
         }
 
-        passET.addTextChangedListener() {
-            registerBtn.isEnabled = usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
-                    && passET.text.toString().trim {it <= ' '}.length >= 4
+        binding.passET.addTextChangedListener {
+            binding.registerBtn.isEnabled = binding.usernameET.text.toString().trim {it <= ' '}.isNotEmpty()
+                    && binding.passET.text.toString().trim {it <= ' '}.length >= 4
         }
 
         dbRef = FirebaseDatabase.getInstance().reference.child("Users")
-        registerBtn.setOnClickListener() {
+        binding.registerBtn.setOnClickListener {
 
             when {
 
-                !Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString().trim {it <= ' '}).matches() -> {
-                    emailLayout.error = "Некорректный адрес электронной почты"
-                    emailET.requestFocus()
+                !Patterns.EMAIL_ADDRESS.matcher(binding.emailET.text.toString().trim {it <= ' '}).matches() -> {
+                    binding.emailLayout.error = "Некорректный адрес электронной почты"
+                    binding.emailET.requestFocus()
                 }
 
                 else -> {
-                    val email: String = emailET.text.toString().trim {it <= ' '}
-                    val username: String = usernameET.text.toString().trim {it <= ' '}
-                    val password: String = passET.text.toString().trim {it <= ' '}
+                    val email: String = binding.emailET.text.toString().trim {it <= ' '}
+                    val username: String = binding.usernameET.text.toString().trim {it <= ' '}
+                    val password: String = binding.passET.text.toString().trim {it <= ' '}
 
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(
@@ -79,7 +79,6 @@ class RegisterActivity : AppCompatActivity() {
                                     val firebaseUserDb = dbRef.child((firebaseUser.uid))
                                     firebaseUserDb.child("email").setValue((firebaseUser.email))
                                     firebaseUserDb.child("username").setValue(username)
-                                    //firebaseUserDb.child("profile_image").setValue("")
 
                                     StyleableToast.makeText(
                                         this@RegisterActivity,
@@ -107,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        cancelImage.setOnClickListener() {
+        binding.cancelImage.setOnClickListener {
             onBackPressed()
         }
     }

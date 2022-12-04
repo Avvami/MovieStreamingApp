@@ -4,17 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.bignerdranch.android.moviestreamingapp.R
+import com.bignerdranch.android.moviestreamingapp.databinding.ActivityAccountSettingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_account_setting.*
 
 class AccountSettingActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityAccountSettingBinding
     private lateinit var dbRef : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_account_setting)
+        binding = ActivityAccountSettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbRef = FirebaseDatabase.getInstance().reference
         val userRef = dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -22,7 +24,7 @@ class AccountSettingActivity : AppCompatActivity() {
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    userEmailTV.text = snapshot.child("email").value.toString()
+                    binding.userEmailTV.text = snapshot.child("email").value.toString()
                 }
             }
 
@@ -32,7 +34,7 @@ class AccountSettingActivity : AppCompatActivity() {
 
         })
 
-        accountSettingGroupBack.setOnClickListener() {
+        binding.accountSettingGroupBack.setOnClickListener() {
             onBackPressed()
         }
     }
