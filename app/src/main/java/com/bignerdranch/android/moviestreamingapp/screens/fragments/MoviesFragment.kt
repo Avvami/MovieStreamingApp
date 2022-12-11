@@ -82,7 +82,7 @@ class MoviesFragment : Fragment() {
                 bundle.putString("preview_image", item[position].imageUrl)
                 val fragment = DetailsFragment()
                 fragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
             }
 
         })

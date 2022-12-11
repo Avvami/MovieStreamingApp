@@ -196,15 +196,92 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/inter_bold"
-                    android:text="#logo"
+                    android:text="#l"
                     android:textColor="@color/white"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/sideUpperBar"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/sideUpperBar" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sideUpperBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/profileImage"
+                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:id="@+id/seriesRL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_effect_w40rec"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/seriesLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="12dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/series"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:transitionName="seriesHomeLink" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/moviesRL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_effect_w40rec"
+                        app:layout_constraintEnd_toStartOf="@+id/myListRL"
+                        app:layout_constraintStart_toEndOf="@+id/seriesRL"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/moviesLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/movies"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:transitionName="moviesHomeLink" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/myListRL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ripple_effect_w40rec"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/myListLink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="12dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/my_list"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:transitionName="myListHomeLink" />
+                    </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profileImage"
@@ -212,94 +289,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:foreground="@drawable/ripple_effect_w40r6rec"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/sideUpperBar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/sideUpperBar"
                     app:shapeAppearanceOverlay="@style/Round6dpStyle"
                     app:srcCompat="@drawable/no_profile_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sideUpperBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/upperBar">
-
-            <RelativeLayout
-                android:id="@+id/seriesRL"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_effect_w40rec"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/seriesLink"
-                    android:transitionName="seriesHomeLink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/series"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/moviesRL"
-                android:layout_width="136dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_effect_w40rec"
-                app:layout_constraintEnd_toStartOf="@+id/myListRL"
-                app:layout_constraintStart_toEndOf="@+id/seriesRL"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/moviesLink"
-                    android:transitionName="moviesHomeLink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/movies"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/myListRL"
-                android:layout_width="136dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ripple_effect_w40rec"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/myListLink"
-                    android:transitionName="myListHomeLink"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/my_list"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

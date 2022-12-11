@@ -63,7 +63,7 @@ class MyListActivity : AppCompatActivity() {
             }
         })
 
-        binding.myListGroupBack.setOnClickListener() {
+        binding.myListGroupBack.setOnClickListener {
             onBackPressed()
         }
     }
@@ -87,6 +87,7 @@ class MyListActivity : AppCompatActivity() {
                 intent.putExtra("title", item[position].itemName)
                 intent.putExtra("preview_image", item[position].imageUrl)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left)
             }
 
         })

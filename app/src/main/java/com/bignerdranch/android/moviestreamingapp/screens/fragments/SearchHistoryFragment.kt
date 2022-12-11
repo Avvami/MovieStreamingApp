@@ -56,7 +56,7 @@ class SearchHistoryFragment : Fragment() {
                         val itemList: List<String> = searchHistory!!.split(";").map { its -> its.trim() }
                         val searchHistoryList: MutableList<CategoryItem> = ArrayList()
 
-                        Log.d("CHECKING", "first check")
+                        Log.d("CHECKING", "loading history data")
                         itemList.forEach { foreach ->
                             val title = dbDBRef.child(foreach).key.toString()
                             val imageUrl = dbDBRef.child(foreach).child("poster_min").value.toString()
@@ -97,7 +97,7 @@ class SearchHistoryFragment : Fragment() {
                 bundle.putString("title", item[position].itemName)
                 val fragment = DetailsFragment()
                 fragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
             }
         })
 
@@ -126,7 +126,7 @@ class SearchHistoryFragment : Fragment() {
 
                     historyList.remove(title)
                     searchHistory = historyList.joinToString(";")
-                    Log.d("CHECKING", "second check")
+                    Log.d("CHECKING", "deleting check")
                     dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("search_history").setValue(searchHistory)
                     dialog?.dismiss()
                 }

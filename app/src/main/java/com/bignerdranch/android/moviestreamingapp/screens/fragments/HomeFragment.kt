@@ -1,6 +1,7 @@
 package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import io.github.muddz.styleabletoast.StyleableToast
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -49,7 +51,7 @@ class HomeFragment : Fragment() {
                     bundle.putString("preview_image", previewUrl)
                     val fragment = DetailsFragment()
                     fragment.arguments = bundle
-                    fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                    fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
                 }
 
                 //String to mutableList
@@ -99,17 +101,17 @@ class HomeFragment : Fragment() {
 
         binding.seriesRL.setOnClickListener {
             val fragment = SeriesFragment()
-            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+            fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
         }
 
         binding.moviesRL.setOnClickListener {
             val fragment = MoviesFragment()
-            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+            fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
         }
 
         binding.myListRL.setOnClickListener {
             val fragment = MyListFragment()
-            fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+            fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
         }
 
         return binding.root
@@ -136,6 +138,15 @@ class HomeFragment : Fragment() {
                     val previewUrl: String = dbDBRef.child(previewTitle).child("poster_min").value.toString()
                     val previewLargeUrl = dbDBRef.child(previewTitle).child("poster").value.toString()
                     context?.let { Glide.with(it).load(previewLargeUrl).apply(RequestOptions().dontTransform()).into(binding.previewImage) }
+                    binding.playBtn.setOnClickListener {
+                        if (dbDBRef.child(previewTitle).child("trailer").exists()) {
+                            val trailerLink = dbDBRef.child(previewTitle).child("trailer").value.toString()
+                            val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(trailerLink))
+                            startActivity(intentBrowser)
+                        } else {
+                            context?.let { it1 -> StyleableToast.makeText(it1, "Трейлер не доступен", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show() }
+                        }
+                    }
 
                     //User
                     val profileImageRef = currentUserRef.child("profile_image")

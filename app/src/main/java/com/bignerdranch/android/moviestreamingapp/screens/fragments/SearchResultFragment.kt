@@ -86,7 +86,7 @@ class SearchResultFragment : Fragment() {
                             if (!historyList.contains(item[position].itemName)) {
                                 historyList.add(item[position].itemName)
                                 val updatedHistory = historyList.joinToString(";")
-                                Log.d("CHECKING", "third check")
+                                Log.d("CHECKING", "adding data to history")
                                 dbRef.child("Users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("search_history").setValue(updatedHistory)
                             } else {
                                 //Skip
@@ -129,7 +129,7 @@ class SearchResultFragment : Fragment() {
                 bundle.putString("preview_image", item[position].imageUrl)
                 val fragment = DetailsFragment()
                 fragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
             }
         })
 

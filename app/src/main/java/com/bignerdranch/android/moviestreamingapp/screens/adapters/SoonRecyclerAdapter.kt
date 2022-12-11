@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.model.SoonItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.squareup.picasso.Picasso
 
 class SoonRecyclerAdapter (private val context : Context, private val item: List<SoonItem>) : RecyclerView.Adapter<SoonRecyclerAdapter.SoonRecyclerViewHolder>() {
 
@@ -31,6 +33,7 @@ class SoonRecyclerAdapter (private val context : Context, private val item: List
         var monthDateText: TextView
         var comingText: TextView
         var descriptionText: TextView
+        private var trailerBtn: RelativeLayout
 
         init {
             imageView = itemView.findViewById(R.id.itemSoonImage)
@@ -39,7 +42,8 @@ class SoonRecyclerAdapter (private val context : Context, private val item: List
             monthDateText = itemView.findViewById(R.id.monthNumTV)
             comingText = itemView.findViewById(R.id.comingTV)
             descriptionText = itemView.findViewById(R.id.soonDescription)
-            itemView.setOnClickListener {
+            trailerBtn = itemView.findViewById(R.id.trailerBtn)
+            trailerBtn.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }

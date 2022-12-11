@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="26dp"
-    android:background="@color/transparent">
+    android:background="@color/black">
 
 
     <TextView
@@ -64,8 +64,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/aboutIcon"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/trailerBtn"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
@@ -79,16 +79,44 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/aboutIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <RelativeLayout
+        android:id="@+id/trailerBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="4dp"
-        android:contentDescription="@string/common_img_desc"
+        android:background="@drawable/button_white_rounded"
         app:layout_constraintBottom_toBottomOf="@+id/itemSoonLogoRL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemSoonLogoRL"
-        app:srcCompat="@drawable/icon_info" />
+        app:layout_constraintTop_toTopOf="@+id/itemSoonLogoRL">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="28dp">
+
+            <ImageView
+                android:id="@+id/playIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/icon_description"
+                app:srcCompat="@drawable/icon_play" />
+
+            <TextView
+                android:id="@+id/trailerTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@id/playIcon"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/resource_trailer"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/comingTV"

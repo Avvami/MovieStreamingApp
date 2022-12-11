@@ -52,11 +52,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryIconsRV"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/blackView5"
-        android:paddingBottom="50dp"
         tools:itemCount="3"
         tools:listitem="@layout/main_recycler_row_item">
 

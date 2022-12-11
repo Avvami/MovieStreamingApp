@@ -1,14 +1,10 @@
 package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.databinding.FragmentSearchBinding
@@ -31,14 +27,14 @@ class SearchFragment : Fragment() {
 
         binding.searchET.addTextChangedListener {
             if (binding.searchET.text.toString().isEmpty()) {
-                fragmentManager?.beginTransaction()?.replace(R.id.searchFrameL, SearchHistoryFragment())?.commit()
+                fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)?.replace(R.id.searchFrameL, SearchHistoryFragment())?.commit()
             } else {
                 val bundle = Bundle()
                 val query = binding.searchET.text.toString()
                 bundle.putString("query", query)
                 val fragment = SearchResultFragment()
                 fragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.replace(R.id.searchFrameL, fragment)?.commit()
+                fragmentManager?.beginTransaction()?.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)?.replace(R.id.searchFrameL, fragment)?.commit()
             }
         }
 

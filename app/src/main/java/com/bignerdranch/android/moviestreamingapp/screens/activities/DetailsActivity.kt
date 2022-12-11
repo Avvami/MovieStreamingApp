@@ -1,14 +1,20 @@
 package com.bignerdranch.android.moviestreamingapp.screens.activities
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
 import com.bignerdranch.android.moviestreamingapp.databinding.ActivityDetailsBinding
+import com.bignerdranch.android.moviestreamingapp.model.Availability
+import com.bignerdranch.android.moviestreamingapp.screens.adapters.GridAvailableRecyclerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.request.RequestOptions
@@ -24,6 +30,8 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
     private lateinit var title: String
     private lateinit var imageUrl: String
+    private var gridRecycler: RecyclerView? = null
+    private var gridRecyclerAdapter: GridAvailableRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +47,7 @@ class DetailsActivity : AppCompatActivity() {
         Glide.with(this@DetailsActivity).load(imageUrl).apply(RequestOptions().dontTransform()).into(binding.posterImage)
 
         getDataFromFirebase(object : Callback {
-            override fun onCallback(title: String, userFavourite: String) {
+            override fun onCallback(title: String, userFavourite: String, trailerLink: String) {
 
                 //String to mutableList
                 var userFavouriteTemp = userFavourite
@@ -75,6 +83,15 @@ class DetailsActivity : AppCompatActivity() {
                         StyleableToast.makeText(this@DetailsActivity, "Добавлено в мой список", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show()
                     }
                 }
+
+                binding.trailerBtn.setOnClickListener {
+                    if (trailerLink.isNotEmpty()) {
+                        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(trailerLink))
+                        startActivity(intentBrowser)
+                    } else {
+                        StyleableToast.makeText(this@DetailsActivity, "Трейлер не доступен", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show()
+                    }
+                }
             }
 
         })
@@ -84,8 +101,14 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right)
+    }
+
     interface Callback {
-        fun onCallback(title: String, userFavourite: String)
+        fun onCallback(title: String, userFavourite: String, trailerLink: String)
     }
 
     private fun getDataFromFirebase (finalCallback: Callback) {
@@ -112,6 +135,24 @@ class DetailsActivity : AppCompatActivity() {
                     } else binding.about.text = "О фильме:"
                     binding.aboutTV.text = itemRef.child("about").value.toString()
 
+                    val itemList: MutableList<Availability> = ArrayList()
+                    itemRef.child("available").children.forEach { foreach ->
+                        when (foreach.key.toString().lowercase()) {
+                            "Netflix".lowercase() -> itemList.add(Availability(foreach.value.toString(), R.drawable.netflix))
+                            "Kinopoisk".lowercase() -> itemList.add(Availability(foreach.value.toString(), R.drawable.kinopoisk))
+                            "HBO".lowercase() -> itemList.add(Availability(foreach.value.toString(), R.drawable.hbo))
+                            "Hulu".lowercase() -> itemList.add(Availability(foreach.value.toString(), R.drawable.hulu))
+                            else -> {
+                                Log.d("LINK", "Something went wrong")
+                            }
+                        }
+                    }
+                    setGridRecycler(itemList)
+
+                    val trailerLink: String = if (itemRef.child("trailer").exists())
+                        itemRef.child("trailer").value.toString()
+                    else ""
+
                     //User
                     val myListRef = currentUserRef.child("my_list")
 
@@ -121,12 +162,32 @@ class DetailsActivity : AppCompatActivity() {
                         ""
                     }
 
-                    finalCallback.onCallback(title, userFavourite)
+                    finalCallback.onCallback(title, userFavourite, trailerLink)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d("TAG", error.message)
+            }
+
+        })
+    }
+
+    private fun setGridRecycler(item: List<Availability>) {
+        gridRecycler = binding.availableRV
+        val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(this, 4)
+        gridRecycler!!.layoutManager = layoutManager
+        gridRecyclerAdapter = GridAvailableRecyclerAdapter(this, item)
+        gridRecycler!!.adapter = gridRecyclerAdapter
+
+        gridRecyclerAdapter?.onItemClickListener(object : GridAvailableRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                if (item[position].link.isNotEmpty()) {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(item[position].link))
+                    startActivity(browserIntent)
+                } else {
+                    Log.d("TAG", "Wrong link")
+                }
             }
 
         })

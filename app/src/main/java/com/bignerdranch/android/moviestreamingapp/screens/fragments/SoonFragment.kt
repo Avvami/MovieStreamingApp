@@ -1,11 +1,14 @@
 package com.bignerdranch.android.moviestreamingapp.screens.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.moviestreamingapp.R
@@ -14,6 +17,7 @@ import com.bignerdranch.android.moviestreamingapp.model.SoonItem
 import com.bignerdranch.android.moviestreamingapp.screens.adapters.SoonRecyclerAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import io.github.muddz.styleabletoast.StyleableToast
 
 class SoonFragment : Fragment() {
 
@@ -75,11 +79,22 @@ class SoonFragment : Fragment() {
 
         soonRecyclerAdapter?.onItemClickListener(object : SoonRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val bundle = Bundle()
-                bundle.putString("title", item[position].itemName)
-                val fragment = DetailsFragment()
-                fragment.arguments = bundle
-                fragmentManager?.beginTransaction()?.add(R.id.frameLayout, fragment)?.addToBackStack(null)?.commit()
+                dbRef.child("Soon").child("${item[position].monthDate} ${item[position].itemName}").child("trailer").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            val trailerLink = snapshot.value.toString()
+                            val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(trailerLink))
+                            startActivity(intentBrowser)
+                        } else {
+                            context?.let { it -> StyleableToast.makeText(it, "Трейлер не доступен", Toast.LENGTH_SHORT, R.style.CustomToastStyle).show() }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d("TAG", error.message)
+                    }
+
+                })
             }
 
         })
